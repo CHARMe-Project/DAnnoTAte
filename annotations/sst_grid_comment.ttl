@@ -4,6 +4,8 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 <chnode:annoID> a oa:Annotation ;
 	oa:hasTarget <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
