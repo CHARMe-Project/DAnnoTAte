@@ -11,24 +11,22 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <chnode:annoID> a oa:Annotation, cito:CitationAct ;
-	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/> ;
+	oa:hasTarget <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
 	oa:hasBody <chnode:bodyID> ;
 	oa:motivatedBy oa:commenting ;
-	oa:motivatedBy oa:linking ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> ;
-	cito:hasCitingEntity "http://dx.doi.org/10.1002/qj.49711147003" ;
-	cito:title "A modelling and observational study of the relationship between sea surface temperature in the North‐West atlantic and the atmospheric general circulation." ;
-	cito:hasCitedEntity <http://www.bodc.ac.uk/data/documents/series/910944/> ;
+	cito:hasCitingEntity "http://dx.doi.org/10.1002/gdj3.20" ;
+	cito:title "Sea surface temperature datasets for climate applications from Phase 1 of the European Space Agency Climate Change Initiative (SST CCI)" ;
+	cito:hasCitedEntity <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
 
 <chnode:agentID> a prov:SoftwareAgent ;
-	foaf:name "BODC SPARQL Harvester" .
+	foaf:name "NERC Harvester" .
 
-<http://linked.bodc.ac.uk/series/910944/> a dctypes:Dataset .
+<http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> a dctypes:Dataset .
 
 <chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
-	cnt:chars "This dataset was cited because presented a similar use case" ;
+	cnt:chars "Describes how the dataset was produced." ;
 	dc:format "text/plain" .
-
 
