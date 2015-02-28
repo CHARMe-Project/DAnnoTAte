@@ -1,0 +1,32 @@
+@prefix chnode: <http://localhost/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/dcterms/> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<chnode:annoID> a oa:Annotation, cito:CitationAct ;
+	oa:hasTarget <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
+	oa:hasBody <chnode:bodyID> ;
+	oa:motivatedBy oa:commenting ;
+	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
+	oa:serializedBy <chnode:agentID> ;
+	cito:hasCitingEntity "http://dx.doi.org/10.1002/gdj3.20" ;
+	cito:title "Sea surface temperature datasets for climate applications from Phase 1 of the European Space Agency Climate Change Initiative (SST CCI)" ;
+	cito:hasCitedEntity <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
+	cito:hasCitationCharacterization cito:citesAsDataSource .
+
+<chnode:agentID> a prov:SoftwareAgent ;
+	foaf:name "NERC Harvester" .
+
+<http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> a dctypes:Dataset .
+
+<chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
+	cnt:chars "Describes how the dataset was produced." ;
+	dc:format "text/plain" .
+
