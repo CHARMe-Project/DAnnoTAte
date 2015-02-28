@@ -6,8 +6,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <chnode:annoID> a oa:Annotation ;
-	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536> ;
-	oa:hasBody <http://www.bodc.ac.uk/data/documents/series/562678>;
+	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536/> ;
+	oa:hasBody <http://www.bodc.ac.uk/data/documents/series/562678/>;
 	oa:motivatedBy oa:linking ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> .
@@ -15,6 +15,6 @@
 <chnode:agentID> a prov:SoftwareAgent ;
 	foaf:name "BODC SPARQL Harvester" .
 
-<http://www.bodc.ac.uk/data/documents/series/40536> a dctypes:Dataset .
+<http://www.bodc.ac.uk/data/documents/series/40536/> a dctypes:Dataset .
 
-<http://www.bodc.ac.uk/data/documents/series/562678>a dctypes:Dataset .
+<http://www.bodc.ac.uk/data/documents/series/562678/>a dctypes:Dataset .
