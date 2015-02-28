@@ -49,6 +49,12 @@
       "abstract": "The Waterville website provides functionality for automatically generating simulated, domestic water meter readings. The objective is to provide researchers studying domestic water consumption with test data for their prototype applications. Default water use profiles have been provided which have been generated using industry statistics such as those provided by the Consumer Council for Water (UK).",
       "uri": "http://waterville.hrwallingford.com/waterville/",
       "impactFactor": 1
+    },
+    {
+      "title": "Precipiation forecast map layer ",
+      "abstract": "Precipitation forecast map layers are available as a single image or as a set of titled images (Web Map Tile Service) covering the UK and showing precipitation.",
+      "uri": "http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer",
+      "impactFactor": 1
     }
   ]
 }
