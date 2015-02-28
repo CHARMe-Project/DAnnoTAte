@@ -40,7 +40,7 @@ function searchButtonClicked() {
   // We load the list of datasets from the server. In a real system we would call a
   // web service here, but for now we just load a static file from GitHub!
   $.ajax({
-    url: 'https://raw.githubusercontent.com/jonblower/envhack15-ui/master/datasets.json',
+    url: 'datasets.json',
     type: 'GET',
     crossDomain: true,
     dataType: 'json',
