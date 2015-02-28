@@ -32,5 +32,11 @@
       "uri": "http://www.bodc.ac.uk/data/documents/series/40536/",
       "impactFactor": 1476.44
     }
+    {
+      "title": "HydroView Now: BaseMap ",
+      "abstract": "HydroView Now: Basemap comprises bathymetry feature types forming a single mosaicked rendition of worldwide coverage, specifically designed to be visualised alongside land-mapping APIs such as Google Maps and OpenStreetMap. HydroView Now: Basemap is delivered via a standard WMTS (web map tile service).",
+      "uri": "http://www.seazone.com/marine-maps/product/hydroview-now-basemap",
+      "impactFactor": 3
+    }
   ]
 }
