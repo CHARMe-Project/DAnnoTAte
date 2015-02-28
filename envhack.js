@@ -47,6 +47,7 @@ var app = angular.module('enviroHack2015', []);
 var datasets = null;
 
 app.controller('MainCtrl', function($scope, $http) {
+
   // Called when the Search button is clicked
   $scope.search = function() {
     // At the moment we ignore the search string!
@@ -62,28 +63,9 @@ app.controller('MainCtrl', function($scope, $http) {
       });
   }
 
-  transformData = function(data, u) {
-    var u = !!u ? u : "Root";
-
-    var children = [];
-    for (var i in data["results"]["bindings"]) {;
-      var childUrl = data["results"]["bindings"][i]["relation"]["value"];
-      children.push({
-        "name": childUrl,
-        "size": 20
-      });
-    }
-    var transformed = {
-      "name": u,
-      "children": children
-    };
-
-    createCodeFlower = new CodeFlower("#visualization", 400, 400).update(transformed);
-    return transformed;
-  };
-
   $scope.showData = function(dataset) {
     $scope.dataset = dataset;
+
     // Create the query string we want to use
     var query = FIND_CITATIONS.replace('${dataset}', dataset.uri);
     $http.get(CHARME_URL, {
@@ -95,15 +77,34 @@ app.controller('MainCtrl', function($scope, $http) {
         citationFromDOI(data.results.bindings[0].publication.value.split(":")[1]);
       else
         console.log("No bindings!");
-    }).
-    error(function(data) {
+    })
+    .error(function(data) {
       console.error(data);
     });
+
     var query = FIND_RELATED_DATA.replace('${datasetURL}', dataset.uri).replace('${datasetURL}', dataset.uri);
     $http.get(CHARME_URL, {
       params: {query: query, output: 'json'},
     })
-    .success(transformData)
+    .success(function(data, u) {
+      var u = !!u ? u : "Root";
+
+      var children = [];
+      for (var i in data["results"]["bindings"]) {;
+        var childUrl = data["results"]["bindings"][i]["relation"]["value"];
+        children.push({
+          "name": childUrl,
+          "size": 20
+        });
+      }
+      var transformed = {
+        "name": u,
+        "children": children
+      };
+
+      createCodeFlower = new CodeFlower("#visualization", 400, 400).update(transformed);
+      return transformed;
+    })
     .error(function(data) {
       console.error(data);
     });
