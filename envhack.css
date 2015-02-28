@@ -22,7 +22,7 @@ h3 {
     float:left;
 }
 #annotations {
-    width:400px; /* Fits on iPad! */
+    width:600px; /* Fits on iPad! */
     height:600px;
     float:left;
     padding:10px; 

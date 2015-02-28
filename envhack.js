@@ -12,6 +12,10 @@ var FIND_NUM_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
                              '}' +
                          '}';
 
+// For the hack we use a global variable to hold the datasets that have been returned
+// from the server.
+var datasets = null;
+
 
 // Called when the window is loaded
 window.onload = function() {
@@ -29,7 +33,8 @@ function searchButtonClicked() {
     crossDomain: true,
     dataType: 'json',
     success: function(response) {
-      updateDatasets(response.datasets);
+      datasets = response.datasets;
+      updateDatasets();
     },
     error: function (xhr, status) {
       alert('error status = ' + status);
@@ -38,13 +43,13 @@ function searchButtonClicked() {
 }
 
 // Updates the datasets on the left-hand list
-function updateDatasets(datasets) {
+function updateDatasets() {
   // Clear the existing list of datasets
   $('#datasets li').remove();
   // Add each dataset to the list of datasets
   for (var i = 0; i < datasets.length; i++) {
     var dataset = datasets[i];
-    $('#datasets ul').append("<li uri=\"" + dataset.uri + "\">" + dataset.title + "</li>");
+    $('#datasets ul').append("<li datasetid=\"" + i + "\">" + dataset.title + "</li>");
   }
   // Turn the list of datasets into a selector
   createSelector('#datasets li');
@@ -60,12 +65,16 @@ function createSelector(selector) {
     $options.removeClass('selected');
     $li.addClass('selected');
     
+    // Get the dataset that has been selected
+    var datasetId = $('#datasets li.selected').attr('datasetid');
+    var dataset = datasets[datasetId];
+    
     // Use the dataset's title to update the title of the Annotations window
-    $('#datasetid').text($('#datasets li.selected').text());
+    $('#datasetid').text(dataset.title);
+    $('#datasetabstract').text(dataset.abstract);
     
     // Create the query string we want to use
-    var datasetUri = $('#datasets li.selected').attr('uri');
-    var queryString = FIND_NUM_CITATIONS.replace('${uri}', datasetUri);
+    var queryString = FIND_NUM_CITATIONS.replace('${uri}', dataset.uri);
     
     // Query the server, calling the given function on success
     queryServer(queryString, function(response) {
