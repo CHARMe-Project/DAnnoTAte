@@ -51,6 +51,22 @@ var FIND_RELATED_DATA = "PREFIX oa: <http://www.w3.org/ns/oa#> "+
                       "} "+
                     "}";
 
+var FIND_COMMENTS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
+                    'PREFIX dctypes: <http://purl.org/dc/dcmitype/> ' +
+                    'PREFIX cnt: <http://www.w3.org/2011/content#> ' +
+                    'PREFIX cito: <http://purl.org/spar/cito/> ' +
+                    'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ' +
+                    'SELECT DISTINCT ?comment ' +
+                    'WHERE { ' +
+                    '  GRAPH <http://localhost:3333/privateds/data/submitted> { ' +
+                    '      ?anno rdf:type ?type ' +
+                    '      FILTER( ?type != cito:CitationAct )' +
+                    '      ?anno oa:hasTarget <${dataset}> .' +
+                    '      ?anno oa:hasBody ?body .' +
+                    '      ?body a cnt:ContentAsText. ?body cnt:chars ?comment .' +
+                    '  }' +
+                    '}';
+
 var app = angular.module('enviroHack2015', []);
 
 // For the hack we use a global variable to hold the datasets that have been returned
@@ -138,6 +154,21 @@ app.controller('MainCtrl', function($scope, $http) {
 
       createCodeFlower = new CodeFlower("#visualization", 400, 400).update(transformed);
       return transformed;
+    })
+    .error(function(data) {
+      console.error(data);
+    });
+
+    var query = FIND_COMMENTS.replace('${dataset}', dataset.uri);
+    $http.get(CHARME_URL, {
+      params: {query: query, output: 'json'},
+    })
+    .success(function(data) {
+      console.log(data);
+      $scope.comments = [];
+      data.results.bindings.forEach(function(item) {
+        $scope.comments.push(item.comment.value);
+      });
     })
     .error(function(data) {
       console.error(data);
