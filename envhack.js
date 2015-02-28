@@ -12,6 +12,18 @@ var FIND_NUM_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
                              '}' +
                          '}';
 
+var FIND_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
+                         'PREFIX cito: <http://purl.org/spar/cito/> ' +
+                         'SELECT ?publication ' +
+                         'WHERE { ' +
+                            'GRAPH <http://localhost:3333/privateds/data/submitted> { ' +
+                               '?cite a <http://purl.org/spar/cito/CitationAct> . ' +
+                               '?cite cito:hasCitedEntity <${dataset}> . ' +
+                               '?cite cito:hasCitingEntity ?publication . ' +
+                             '}' +
+                         '}';                       
+                         
+
 // For the hack we use a global variable to hold the datasets that have been returned
 // from the server.
 var datasets = null;
@@ -72,13 +84,15 @@ function createSelector(selector) {
     // Use the dataset's title to update the title of the Annotations window
     $('#datasetid').text(dataset.title);
     $('#datasetabstract').text(dataset.abstract);
+    $('#dataseturi').html("<a href=\"" + dataset.uri + "\">" + dataset.uri + "</a>");
     
     // Create the query string we want to use
-    var queryString = FIND_NUM_CITATIONS.replace('${uri}', dataset.uri);
+    var queryString = FIND_CITATIONS.replace('${dataset}', dataset.uri);
+    //alert(queryString);
     
     // Query the server, calling the given function on success
     queryServer(queryString, function(response) {
-      alert(response.results.bindings[0].numOfCitations.value + ' citations');
+      alert(response.results.bindings.length + ' citations');
     });
     
   });
