@@ -7,8 +7,9 @@
 
 <chnode:annoID> a oa:Annotation ;
 	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536/> ;
-	oa:hasBody <http://www.bodc.ac.uk/data/documents/series/562678/>;
-	oa:motivatedBy oa:linking ;
+	oa:hasBody <chnode:bodyID>>;
+	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/>;
+	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> .
 
@@ -17,4 +18,8 @@
 
 <http://www.bodc.ac.uk/data/documents/series/40536/> a dctypes:Dataset .
 
-<http://www.bodc.ac.uk/data/documents/series/562678/>a dctypes:Dataset .
+<http://www.bodc.ac.uk/data/documents/series/910944/>a dctypes:Dataset .
+
+<chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
+	cnt:chars "These two datasets are useful for when doing such and such a study." ;
+	dc:format "text/plain" .
