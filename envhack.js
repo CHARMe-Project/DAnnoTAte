@@ -14,11 +14,14 @@ var FIND_NUM_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
 
 var FIND_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
                          'PREFIX cito: <http://purl.org/spar/cito/> ' +
-                         'SELECT ?publication ' +
+                         'PREFIX cnt: <http://www.w3.org/2011/content#> ' +
+                         'SELECT ?publication ?comment ' +
                          'WHERE { ' +
                             'GRAPH <http://localhost:3333/privateds/data/submitted> { ' +
                                '?cite a <http://purl.org/spar/cito/CitationAct> . ' +
                                '?cite cito:hasCitedEntity <${dataset}> . ' +
+                               '?cite oa:hasBody ?body . ' +
+                               '?body cnt:chars ?comment . ' +
                                '?cite cito:hasCitingEntity ?publication . ' +
                              '}' +
                          '}';
@@ -105,9 +108,8 @@ app.controller('MainCtrl', function($scope, $http) {
       console.log(data);
       $scope.publications = [];
       data.results.bindings.forEach(function(item) {
-        citationFromDOI(item.publication.value);
+        citationFromDOI(item.publication.value, item.comment.value);
       });
-      console.log($scope.publications);
     })
     .error(function(data) {
       console.error(data);
@@ -142,11 +144,17 @@ app.controller('MainCtrl', function($scope, $http) {
     });
   }
 
-  function citationFromDOI(url) {
+  function citationFromDOI(url, comment) {
     $http.get(url, {
       headers: {"Accept": "application/vnd.citationstyles.csl+json;q=1.0"},
     })
-    .success(function(data) { console.log(data); $scope.publications.push(data); })
-    .error(function(data) { console.error(data); });
+    .success(function(data) {
+      data.comment = comment;
+      console.log(data);
+      $scope.publications.push(data);
+    })
+    .error(function(data) {
+      console.error(data);
+    });
   }
 });
