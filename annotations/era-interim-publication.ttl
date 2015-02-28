@@ -1,0 +1,31 @@
+@prefix chnode: <http://localhost/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/dcterms/> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<chnode:annoID> a oa:Annotation, cito:CitationAct ;
+	oa:hasTarget <http://www.ecmwf.int/en/research/climate-reanalysis/era-interim> ;
+	oa:hasBody <chnode:bodyID> ;
+	oa:motivatedBy oa:describing ;
+	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
+	oa:serializedBy <chnode:agentID> ;
+	cito:hasCitingEntity "http://dx.doi.org/10.1002/qj.828" ;
+	cito:title "The ERA-Interim reanalysis: configuration and performance of the data assimilation system" ;
+	cito:hasCitedEntity <http://www.ecmwf.int/en/research/climate-reanalysis/era-interim> ;
+	cito:hasCitationCharacterization cito:documents .
+
+<chnode:agentID> a prov:SoftwareAgent ;
+	foaf:name "BODC SPARQL Harvester" .
+
+<http://www.ecmwf.int/en/research/climate-reanalysis/era-interim> a dctypes:Dataset .
+
+<chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
+	cnt:chars "This publication describes how the ERA-Interim dataset was produced" ;
+	dc:format "text/plain" .
