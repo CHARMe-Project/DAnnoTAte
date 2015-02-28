@@ -91,8 +91,9 @@ function createSelector(selector) {
     //alert(queryString);
     
     // Query the server, calling the given function on success
-    queryServer(queryString, function(response) {
-      alert(response.results.bindings.length + ' citations');
+    queryServer(queryString, function(data) {
+      console.log(data);
+      citationFromDOI(data.results.bindings[0].publication.value.split(":")[1]);
     });
     
   });
@@ -112,4 +113,13 @@ function queryServer(query, callback) {
       alert('error status = ' + status);
     }
   });  
+}
+
+function citationFromDOI(doi) {
+  $.ajax({
+    url: 'http://dx.doi.org/' + doi,
+    type: 'GET',
+    headers: {"Accept": "application/vnd.citationstyles.csl+json;q=1.0"},
+    success: function(data) { console.log(data); }
+  });
 }
