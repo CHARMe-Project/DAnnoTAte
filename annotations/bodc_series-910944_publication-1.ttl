@@ -16,8 +16,8 @@
 	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> ;
-	cito:hasCitingEntity <doi:10.5285/0c9b8ad1-ba02-0c0e-e053-6c86abc03d26> ;
-	cito:hasCitedEntity <http://linked.bodc.ac.uk/series/910944> ;
+	cito:hasCitingEntity "A modelling and observational study of the relationship between sea surface temperature in the North‐West atlantic and the atmospheric general circulation." ;
+	cito:hasCitedEntity "Solar forcing of North Atlantic surface temperature and salinity over the past millennium." ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
 
 <chnode:agentID> a prov:SoftwareAgent ;
