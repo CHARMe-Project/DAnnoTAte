@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- http://www.redotheweb.com/CodeFlower/ -->
+<html>
+  <!-- Use the Source, Luke -->
+  <head>
+    <title>Related Data</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+    <style type="text/css">
+circle.node {
+  cursor: pointer;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+circle.node.directory {
+  /*stroke: #9ecae1;*/
+  stroke: #555;
+  stroke-width: 2px;
+}
+
+circle.node.collapsed {
+  stroke: #555;
+}
+
+.nodetext {
+  fill: #252929;
+  font-weight: bold;
+  text-shadow: 0 0 0.2em white;
+}
+
+line.link {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1.5px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      
+        <div id="visualization"></div>
+  
+    </div>
+    <script type="text/javascript" src="javascripts/d3/d3.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.geom.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.layout.js"></script>
+    <script type="text/javascript" src="javascripts/CodeFlower.js"></script>
+    <script type="text/javascript" src="javascripts/dataConverter.js"></script>
+    <script type="text/javascript">
+      var currentCodeFlower;
+
+      var createCodeFlower = function(json) {
+        var total = countElements(json);
+        //w = parseInt(Math.sqrt(total) * 50, 10);
+        //h = parseInt(Math.sqrt(total) * 50, 10);
+        w = 400;
+        h = 400;
+        currentCodeFlower = new CodeFlower("#visualization", w, h).update(json);
+        //currentCodeFlower.showtext();
+      };
+
+      //d3.json('data.json', createCodeFlower);
+      d3.json('simpledata.json', createCodeFlower);
+      
+    </script>
+  </body>
+</html>
