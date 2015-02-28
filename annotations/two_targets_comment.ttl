@@ -7,7 +7,7 @@
 
 <chnode:annoID> a oa:Annotation ;
 	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536/> ;
-	oa:hasBody <chnode:bodyID>>;
+	oa:hasBody <chnode:bodyID>;
 	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/>;
 	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
