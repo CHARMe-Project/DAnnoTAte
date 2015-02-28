@@ -1,0 +1,20 @@
+{
+  "name": "root",
+  "children": [
+    {"name": "A",
+     "children": [
+       { "name": "banana",
+          "language": "Javascript",
+          "size": 3
+       },
+       { "name": "orange",
+          "language": "Javascript",
+          "size": 4
+       }
+       ],
+     "size": 2
+    }
+  ],
+  "size": 1,
+  "nbFiles": 5
+}
