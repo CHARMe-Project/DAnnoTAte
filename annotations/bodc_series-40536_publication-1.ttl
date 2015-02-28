@@ -25,7 +25,7 @@
 <chnode:agentID> a prov:SoftwareAgent ;
 	foaf:name "BODC SPARQL Harvester" .
 
-<http://linked.bodc.ac.uk/series/910944> a dctypes:Dataset .
+<http://linked.bodc.ac.uk/series/40536> a dctypes:Dataset .
 
 <chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
 	cnt:chars "This dataset was cited because the quality of this data" ;
