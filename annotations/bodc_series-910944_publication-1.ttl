@@ -17,7 +17,7 @@
 	oa:motivatedBy oa:linking ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> ;
-	cito:hasCitingEntity "dx.doi.org/10.1002/qj.49711147003" ;
+	cito:hasCitingEntity "http://dx.doi.org/10.1002/qj.49711147003" ;
 	cito:title "A modelling and observational study of the relationship between sea surface temperature in the North‐West atlantic and the atmospheric general circulation." ;
 	cito:hasCitedEntity <http://www.bodc.ac.uk/data/documents/series/910944/> ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
@@ -31,5 +31,4 @@
 	cnt:chars "This dataset was cited because presented a similar use case" ;
 	dc:format "text/plain" .
 
-<doi:10.5285/0c9b8ad1-ba02-0c0e-e053-6c86abc03d26> a fabio:JournalArticle ;
-	dcterms:title "Science Magazine: Important CTD Casts around the UK" .
+
