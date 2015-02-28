@@ -1,0 +1,33 @@
+@prefix chnode: <http://localhost/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix dcterms: <http://purl.org/dc/dcterms/> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<chnode:annoID> a oa:Annotation, cito:CitationAct ;
+	oa:hasTarget <http://linked.bodc.ac.uk/series/40536> ;
+	oa:hasBody <chnode:bodyID> ;
+	oa:motivatedBy oa:commenting ;
+	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
+	oa:serializedBy <chnode:agentID> ;
+	cito:hasCitingEntity <doi:10.5285/0c9b8ad1-ba02-0c0e-e053-6c86abc03d26> ;
+	cito:hasCitedEntity <http://linked.bodc.ac.uk/series/910944> ;
+	cito:hasCitationCharacterization cito:citesAsDataSource .
+
+<chnode:agentID> a prov:SoftwareAgent ;
+	foaf:name "BODC SPARQL Harvester" .
+
+<http://linked.bodc.ac.uk/series/910944> a dctypes:Dataset .
+
+<chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
+	cnt:chars "This dataset was cited because the quality of this data" ;
+	dc:format "text/plain" .
+
+<doi:10.5285/0c9b8ad1-ba02-0c0e-e053-6c86abc03d26> a fabio:JournalArticle ;
+	dcterms:title "Science Magazine: Important CTD Casts around the UK" .
