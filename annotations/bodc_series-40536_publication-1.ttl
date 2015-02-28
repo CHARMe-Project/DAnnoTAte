@@ -17,7 +17,7 @@
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> ;
 	cito:hasCitingEntity "The operational sea surface temperature and sea ice analysis (OSTIA) system." ;
-	cito:hasCitedEntity <http://linked.bodc.ac.uk/series/910944> ;
+	cito:hasCitedEntity "Connection between autumn Sea Surface Temperature and winter precipitation in the Iberian Peninsula." ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
 
 <chnode:agentID> a prov:SoftwareAgent ;
