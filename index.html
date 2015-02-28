@@ -1,8 +1,6 @@
 <html ng-app="enviroHack2015">
   <head>
     <link rel="stylesheet" href="envhack.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js" type="text/javascript"></script>
-    <script src="envhack.js" type="text/javascript"></script>
     <title>EnviroHack 2015</title>
   </head>
   <body ng-controller="MainCtrl">
@@ -27,8 +25,15 @@
       <h3>Related datasets</h3>
       <h3>What the users say</h3>
     </div>
+    <div id="visualization"></div>
     <div id="footer">
       Developed at EnviroHack 2015 | Powered by CHARMe
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js" type="text/javascript"></script>
+    <script src="envhack.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script type="text/javascript" src="http://www.redotheweb.com/CodeFlower/javascripts/CodeFlower.js"></script>
+    <script type="text/javascript" src="http://www.redotheweb.com/CodeFlower/javascripts/dataConverter.js"></script>
   </body>
 </html>
