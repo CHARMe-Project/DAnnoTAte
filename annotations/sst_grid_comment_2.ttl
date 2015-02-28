@@ -1,0 +1,23 @@
+@prefix chnode: <http://localhost/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<chnode:annoID> a oa:Annotation ;
+	oa:hasTarget <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
+	oa:hasBody <chnode:bodyID>;
+	oa:motivatedBy oa:commenting ;
+	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
+	oa:serializedBy <chnode:agentID> .
+
+<chnode:agentID> a prov:SoftwareAgent ;
+	foaf:name "NERC Harvester" .
+
+<http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> a dctypes:Dataset .
+
+
+<chnode:bodyID> a cnt:ContentAsText, dctypes:Text ;
+	cnt:chars "Was very useful for knowing where to go swimming." ;
+	dc:format "text/plain" .
