@@ -19,12 +19,12 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="list-group">
-          <a class="list-group-item" ng-repeat="dataset in datasets" ng-click="showData(dataset)">{{dataset.title}}</a>
+          <a class="list-group-item" ng-repeat="dataset in datasets" ng-click="showData(dataset)">{{dataset.title}} <span class="badge">{{dataset.impactFactor}}</span></a>
         </div>
       </div>
-      <div class="col-sm-8">
+      <div class="col-sm-7">
         <div id="annotations" ng-if="dataset">
           <p>Dataset: {{dataset.uri}}</p>
           <h2>Dataset description:</h2>
