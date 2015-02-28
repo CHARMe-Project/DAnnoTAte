@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!-- http://www.redotheweb.com/CodeFlower/ -->
+<html>
+  <!-- Use the Source, Luke -->
+  <head>
+    <title>Related Data</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link type="text/css" rel="stylesheet" href="stylesheets/bootstrap.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Rosario:400,700' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+    <style type="text/css">
+circle.node {
+  cursor: pointer;
+  stroke: #000;
+  stroke-width: .5px;
+}
+
+circle.node.directory {
+  /*stroke: #9ecae1;*/
+  stroke: #555;
+  stroke-width: 2px;
+}
+
+circle.node.collapsed {
+  stroke: #555;
+}
+
+.nodetext {
+  fill: #252929;
+  font-weight: bold;
+  text-shadow: 0 0 0.2em white;
+}
+
+line.link {
+  fill: none;
+  stroke: #555;
+  stroke-width: 1.5px;
+}
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      
+        <div id="visualization"></div>
+  
+    </div>
+    <script type="text/javascript" src="javascripts/d3/d3.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.geom.js"></script>
+    <script type="text/javascript" src="javascripts/d3/d3.layout.js"></script>
+    <script type="text/javascript" src="javascripts/CodeFlower.js"></script>
+    <script type="text/javascript" src="javascripts/dataConverter.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
+    <script type="text/javascript">
+      var currentCodeFlower;
+      var w =400; var h = 400;
+
+      /*
+      var createCodeFlower = function(json) {
+        currentCodeFlower = new CodeFlower("#visualization", w, h).update(json);
+      };
+      d3.json('simpledata.json', createCodeFlower);
+      */
+      
+      var transformData = function(data, u){
+            var u = !!u ? u : "Root";
+            
+            var data = !!data ? data : {
+              "head": {
+                "vars": [ "relation" ]
+              } ,
+              "results": {
+                "bindings": [
+                  {
+                    "relation": { "type": "uri" , "value": "http://www.bodc.ac.uk/data/documents/series/558065/" }
+                  } ,
+                  {
+                    "relation": { "type": "uri" , "value": "https://charme-test.cems.rl.ac.uk/resource/70e8ba3cd91b4c899c4a38001f94ef0a" }
+                  }
+                ]
+              }
+            };
+            
+            var children = [];
+            for(var i in data["results"]["bindings"]){;
+                var childUrl = data["results"]["bindings"][i]["relation"]["value"];
+                children.push({"name": childUrl, "size": 20});
+            }
+            var transformed = {
+                "name": u,
+                "children": children
+            };
+            
+            createCodeFlower = new CodeFlower("#visualization", w, h).update(transformed);
+            return transformed;
+      };
+      
+      var getDataElement = function(datasetURL){
+            var q = "PREFIX oa: <http://www.w3.org/ns/oa#> " +
+                "SELECT DISTINCT ?relation " + 
+                "WHERE { " + 
+                  "GRAPH <http://localhost:3333/privateds/data/submitted> {  " + 
+                    "{ " + 
+                      "?anno oa:hasTarget <{{datasetURL}}> . ".replace("{{datasetURL}}", datasetURL) + 
+                      "?anno oa:motivatedBy oa:linking . " + 
+                      "?anno oa:hasBody ?relation . " + 
+                    "} UNION { " + 
+                      "?anno oa:hasBody <{{datasetURL}}> . ".replace("{{datasetURL}}", datasetURL) + 
+                      "?anno oa:motivatedBy oa:linking . " + 
+                      "?anno oa:hasTarget ?relation . " + 
+                    "} " + 
+                    "?anno ?p ?o " + 
+                  "}"  +
+                "}";
+
+            
+            var ax = $.ajax( {
+                url: "http://charme-test.cems.rl.ac.uk/sparql",
+                data: {
+                    "query": q
+                },
+                method: 'GET', 
+                dataType: 'json'
+             });
+             return ax;
+         }
+
+      
+      $(document).ready(function(){
+        
+        var datasetURL = "http://www.bodc.ac.uk/data/documents/series/910944/";
+        
+        function yay(a,b,c){ console.log(['yay', a, b, c]); }
+        function nay(a,b,c){ console.log(['nay', a, b, c]); }
+        
+        getDataElement(datasetURL)
+        .done( transformData )
+        .fail( nay ).always(function() { console.log( "always" ); });
+      
+      });
+
+    </script>
+  </body>
+</html>

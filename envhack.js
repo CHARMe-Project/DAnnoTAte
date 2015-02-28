@@ -23,22 +23,30 @@ var FIND_CITATIONS = 'PREFIX oa: <http://www.w3.org/ns/oa#> ' +
                              '}' +
                          '}';
 
-var FIND_RELATED_DATA = "PREFIX oa: <http://www.w3.org/ns/oa#> " +
-                        "SELECT DISTINCT ?relation " +
-                        "WHERE { " +
-                          "GRAPH <http://localhost:3333/privateds/data/submitted> {  " +
-                            "{ " +
-                              "?anno oa:hasTarget <${datasetURL}> . " +
-                              "?anno oa:motivatedBy oa:linking . " +
-                              "?anno oa:hasBody ?relation . " +
-                            "} UNION { " +
-                              "?anno oa:hasBody <${datasetURL}> . " +
-                              "?anno oa:motivatedBy oa:linking . " +
-                              "?anno oa:hasTarget ?relation . " +
-                            "} " +
-                            "?anno ?p ?o " +
-                          "}"  +
-                        "}";
+var FIND_RELATED_DATA = "PREFIX oa: <http://www.w3.org/ns/oa#> "+
+                    "PREFIX dctypes: <http://purl.org/dc/dcmitype/>  "+
+                    "SELECT DISTINCT ?relation "+
+                    "WHERE { "+
+                      "GRAPH <http://localhost:3333/privateds/data/submitted> {  "+
+                        "{ "+
+                          "<${datasetURL}> a dctypes:Dataset . "+
+                          "?anno oa:hasTarget <${datasetURL}> . "+
+                          "?anno oa:hasBody ?relation . "+
+                          "?relation a dctypes:Dataset . "+
+                        "} UNION { "+
+                          "<${datasetURL}> a dctypes:Dataset . "+
+                          "?anno oa:hasBody <${datasetURL}> . "+
+                          "?anno oa:hasTarget ?relation . "+
+                          "?relation a dctypes:Dataset . "+
+                        "} UNION { "+
+                          "<${datasetURL}> a dctypes:Dataset . "+
+                          "?anno oa:hasTarget <${datasetURL}> . "+
+                          "?anno oa:hasTarget ?relation . "+
+                          "?relation a dctypes:Dataset . "+
+                          "FILTER(?relation != <${datasetURL}>) "+
+                        "} "+
+                      "} "+
+                    "}";
 
 var app = angular.module('enviroHack2015', []);
 
@@ -63,6 +71,28 @@ app.controller('MainCtrl', function($scope, $http) {
       });
   }
 
+
+  transformData = function(data, u) {
+    console.log(data)
+    var u = !!u ? u : "Root";
+
+    var children = [];
+    for (var i in data["results"]["bindings"]) {;
+      var childUrl = data["results"]["bindings"][i]["relation"]["value"];
+      children.push({
+        "name": childUrl,
+        "size": 20
+      });
+    }
+    var transformed = {
+      "name": u,
+      "children": children
+    };
+
+    createCodeFlower = new CodeFlower("#visualization", 600, 200).update(transformed);
+    return transformed;
+  };
+
   $scope.showData = function(dataset) {
     $scope.dataset = dataset;
 
@@ -83,7 +113,8 @@ app.controller('MainCtrl', function($scope, $http) {
       console.error(data);
     });
 
-    var query = FIND_RELATED_DATA.replace('${datasetURL}', dataset.uri).replace('${datasetURL}', dataset.uri);
+    var query = FIND_RELATED_DATA.replace(new RegExp('\\$\\{datasetURL\\}', "g"), dataset.uri);
+    
     $http.get(CHARME_URL, {
       params: {query: query, output: 'json'},
     })
