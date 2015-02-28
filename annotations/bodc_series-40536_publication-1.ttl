@@ -16,7 +16,7 @@
 	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> ;
-	cito:hasCitingEntity <doi:10.5285/0c9b8ad1-ba02-0c0e-e053-6c86abc03d26> ;
+	cito:hasCitingEntity "The operational sea surface temperature and sea ice analysis (OSTIA) system." ;
 	cito:hasCitedEntity <http://linked.bodc.ac.uk/series/910944> ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
 
