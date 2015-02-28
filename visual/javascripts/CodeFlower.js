@@ -73,9 +73,9 @@ CodeFlower.prototype.update = function(json) {
     .attr("r", function(d) { return d.children ? 3.5 : Math.pow(d.size, 2/5) || 1; })
     
     .style("fill", function(d){ 
-        if (d.name == "Root"){ return "white"; }
+        if (d.name == "Root" || String(d.name) == "200"){ return "orange"; }
         else {
-            return "green"; 
+            return "steelblue"; 
         }
     })
     /* TODO: make nicer colors
