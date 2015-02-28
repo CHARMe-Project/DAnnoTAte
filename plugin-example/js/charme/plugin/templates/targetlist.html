@@ -1,0 +1,59 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<h4>Targets <span title="Target(s) of this annotation" class="icon-question-sign"></span></h4>
+<div class="row">
+    <div class="span8">
+        Search: <input type="text" class="input-medium search-query span5" data-ng-model="searchText" />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Target</td>
+            <td>Type</td>
+            <td class="pull-right">
+                <a data-ng-click="addSelected()" class="btn btn-default btn-small" 
+                   title="Targets can be added by minimising/moving this window and selecting them by clicking on the corresponding checkboxes. Clicking on this button will then add them to the annotation.">
+                   <i class="icon icon-plus"></i>&nbsp; Add selected targets</a>&nbsp;
+                <button class="btn btn-danger btn-small" 
+                     data-ng-click="deleteTarget(filteredTargets); searchText=''">Delete all{{searchText ? ' Matches' : ''}}
+                </button>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat="target in filteredTargets = (anno.targets | filter:searchText)">
+        <td><a href="{{target.uri}}" target="{{target.whereToOpen}}"
+               data-ng-click="viewAnnotation(target.whereToOpen)"
+               title="{{target.fullName | truncate:longTitleLength}}">{{target.shortName | truncate:shortTitleLength}}</a></td>
+        <!--<td>{{knownTargetTypeLabels[target.typeId] ? knownTargetTypeLabels[target.typeId] : 'Unknown'}}</td>-->
+        <td class="target-type-{{target.validity}}">{{target.desc}}</td>
+        <td style="text-align: right;">
+            <button class="btn btn-danger btn-mini" data-ng-disabled="target.unDeletable" data-ng-click="deleteTarget(target)">Delete</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -1,0 +1,80 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<div data-ng-include="'templates/header.html'"></div>
+<div class="modal-body modal-body-list">
+    <div id="searchContainer" data-ng-class="['search-container', 'search-' + searchOpen, 'search-overflow-y']" >
+       <div class="btn search-button-holder" data-ng-click="setSearchOpen()" style="float:right;">
+           <span data-ng-class="isSearchOpen ? 'icon-chevron-left' : 'icon-search'"></span>
+       </div>
+       <div class="search-content">
+           <div data-ng-show="isSearchOpen">
+               <h5>Search Annotations</h5>
+               <hr />
+               <div data-ng-include="'templates/charmesearch.html'"></div>
+           </div>
+       </div>
+    </div>
+
+    <div data-ng-class="['search-results', 'search-results-' + searchOpen]">
+        <div class="alert alert-error" data-ng-show="errorMsg">{{errorMsg}}</div>
+
+        <div class="target-list">
+            <span>&nbsp; Viewing annotations for: </span>
+            <select id="chooseTarget" class="{{largeSpan}}" data-ng-model="selectedTarget" data-ng-change="refreshTargetSelection();">
+                <option data-ng-repeat="(targetHref, targetDetails) in targets" value="{{targetHref}}">{{targetDetails.name}} ({{targetDetails.desc}})</option>
+            </select>
+            <span class="icon-question-sign"
+                  title="If target name is truncated, open dropdown to see name in full (search pane will temporarily collapse if necessary)"></span>
+            <hr />
+        </div>
+        <table class="table search-results-table">
+            <thead><tr><td>Title</td><td>Annotated by</td><td>Organisation</td><td>Date</td></tr></thead>
+            <tbody>
+                <tr data-ng-hide="!loadingList && !loadingFacets">
+                    <td colspan="4" class="spinner spinner-small">
+                        <img src ="img/ajaxspinner.gif" />
+                    </td>
+                </tr>
+                <tr data-ng-show="!loadingList && !loadingFacets && entries.length===0"><td colspan="4">No annotations</td></tr>
+                <tr data-ng-show="!loadingList && !loadingFacets" data-ng-repeat="entry in entries">
+                    <td><a data-ng-show="entry.title" data-ng-href="{{entry.uri}}" data-ng-click="viewAnnotation()"
+                           title="{{entry.title | truncate:longTitleLength}}">{{entry.title | truncate:shortTitleLength}}</a>
+                        <a data-ng-hide="entry.title" data-ng-href="{{entry.uri}}" data-ng-click="viewAnnotation()"
+                           title="No comment was included in this annotation">(No comment)</a>
+                    </td>
+
+                    <td class="listViewAuthorDetail"><a href="{{entry.uri}}" data-ng-click="directSearch('userName', entry.userName, $event)">{{entry.author}}</a></td>
+                    <td class="listViewAuthorDetail"><a href="{{entry.uri}}" data-ng-click="directSearch('organization', entry.organizationUri, $event);">{{entry.organizationName}}</a></td>
+                    <td>{{entry.date | date:'d MMM yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div data-ng-class="['pagination_container', 'pagination_padding-' + searchOpen]">
+        <div data-ng-include="'templates/pagination.html'"></div>
+    </div>
+</div>
+<div data-ng-include="'templates/footer.html'"></div>

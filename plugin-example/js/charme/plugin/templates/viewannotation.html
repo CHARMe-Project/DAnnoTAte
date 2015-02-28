@@ -1,0 +1,180 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<div data-ng-include="'templates/header.html'"></div>
+<div class="modal-body modal-body-view">
+    <div data-ng-show="processing && !errorMsg" class="ajaxModal">
+        <div class="modalProgress spinner">
+            <img src="img/ajaxspinner.gif"/>
+        </div>
+    </div>
+    <div class="alert alert-error" data-ng-show="errorMsg">{{errorMsg}}</div>
+    <div data-ng-hide="!loading" class="spinner spinner-small">
+        <img src ="img/ajaxspinner.gif"/>
+    </div>
+    <div data-ng-show="!loading && !errorMsg" class="tabbable"> <!-- Only required for left/right tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-target="#tab1" data-toggle="tab">Details</a></li>
+            <li><a data-target="#tab2" data-toggle="tab">Targets <span class="badge badge-info">{{targetList.length}}</span></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane .fade" id="tab2">
+                <h4>Targets <span title="Target(s) of this annotation" class="icon-question-sign"></span></h4>
+                <form class="target-search-form form-search">
+                    <div class="row">
+                        <div class="span8">
+                            Search: <input type="text" class="input-medium search-query span5" data-ng-model="searchText" />
+                        </div>
+                    </div>
+                </form>
+                <table class="table">
+                    <thead><tr><td>Target</td><td>Type</td></tr></thead>
+                    <tbody>
+                    <tr data-ng-repeat="target in (filteredTargets = (targetList | filter:searchText))">
+                        <td><a href="{{target.uri}}" target="{{target.whereToOpen}}" 
+                               data-ng-click="viewAnnotation(target.whereToOpen)"
+                               title="{{target.fullName | truncate:longTitleLength}}">{{target.shortName | truncate:shortTitleLength}}</a></td>
+                        <td>{{target.desc}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane active .fade" id="tab1">
+        <div>
+            <a href="" data-ng-click="directSearch('organization', organizationUri)">{{organizationName}}</a> - 
+            <a href="" data-ng-click="directSearch('userName', userName)">{{author}}</a> 
+            <span data-ng-show="email">({{email}})</span> - 
+            <span>{{modificationOf ? 'Edited at' : 'Created at'}} {{date | date:' HH:mm, d MMM yyyy'}}</span>
+        </div>
+        <br>
+        <div class="popover popover-visible">
+            <div class="popover-content">
+                <p class="anno-comments" data-ng-show="comment">"{{comment}}"</p>
+                <p data-ng-show="noComment">No comment</p>
+            </div>
+        </div>
+        <div data-ng-show="motivationTags">
+            <h4>Motivation<span data-ng-show="multipleMotivations">s</span> <span title="Tag(s) describing the motivation of the annotation" class="icon-question-sign"></span></h4>
+            <div>
+                <span data-ng-repeat="tag in motivationTags" class="badge badge-info semanticTag">{{tag.desc}}</span>
+            </div>
+        </div>
+
+        <div data-ng-show="domainTags">
+            <br>
+            <h4>Domain<span data-ng-show="multipleDomains">s</span> of interest 
+                <span title="Tag(s) describing the subject of the annotation (hover on tags for full description)" 
+                      class="icon-question-sign"></span></h4>
+            <div>
+                <span title="{{tag.desc}}" data-ng-repeat="tag in domainTags" class="badge badge-info semanticTag">{{tag.desc | shortDomainLabel}}</span>
+            </div>
+        </div>
+        
+	<div data-ng-show="link && !citation">
+            <br>
+            <h4>Link <span title="This link is relevant to the target(s) that this CHARMe annotation applies to" class="icon-question-sign"></span></h4>
+                <div data-ng-show="linkTypes">
+                    <p><strong>Classified as: &nbsp;</strong>
+                    <span data-ng-repeat="linkType in linkTypes"
+                    class="badge badge-info semanticTag">{{linkType}}</span></p>
+                </div>
+                <div data-ng-show="link.loading" class="spinner spinner-small">
+                    <img src="img/ajaxspinner.gif"/> Fetching bibliographic information...
+                </div>
+                <p>
+                    {{link.text}}
+                </p>
+                <div class="text-warning" data-ng-show="link.error">{{link.error}}</div>
+                <a href="{{link.uri}}" target="_blank">{{link.uri | truncate:linkLength}}</a>
+	</div>    
+	<div data-ng-show="citation">
+            <br>
+            <h4>Citation <span title="This link is relevant to the target(s) that this CHARMe annotation applies to" class="icon-question-sign"></span></h4>
+                <div data-ng-show="citation.types">
+                    <p><strong>Classified as: &nbsp;</strong>
+                    <span data-ng-repeat="citoType in citation.types"
+                    class="badge badge-info semanticTag">{{citoType}}</span></p>
+                </div>
+                <div data-ng-show="citation.loading" class="spinner spinner-small">
+                    <img src="img/ajaxspinner.gif"/> Fetching bibliographic information...
+                </div>
+                <p>
+                    {{citation.text}}
+                </p>
+                <div class="text-warning" data-ng-show="citation.error">{{citation.error}}</div>
+                <a href="{{citation.uri}}" target="_blank">{{citation.uri | truncate:linkLength}}</a>
+        </div>
+                
+        <div>
+            <br>
+            <h4>Replies</h4>
+            <table class="table search-results-table">
+                <div class="alert alert-error" data-ng-show="repliesErrorMsg">{{repliesErrorMsg}}</div>
+                <thead><tr><td> </td><td>Title</td><td>Annotated by</td><td>Organisation</td><td>Date</td></tr></thead>
+                <tbody>
+                    <tr data-ng-hide="!loadingReplies">
+                        <td colspan="5" class="spinner spinner-small">
+                            <img src ="img/ajaxspinner.gif" />
+                        </td>
+                    </tr>
+                    <tr data-ng-show="!loadingReplies && !repliesErrorMsg && entries.length===0"><td colspan="5">No annotations</td></tr>
+                    <tr data-ng-repeat="entry in entries" data-ng-hide="entry.hide">
+                        <td class="more-replies-button">
+                            <span class="badge badge-info" 
+                                  data-ng-show="entry.moreReplies && !entry.loading && !entry.showing" 
+                                  title="Click to see more replies"
+                                  data-ng-click="entry.loading=!entry.loaded; entry.showing=entry.loaded; 
+                                                 showMoreReplies(entry.id, entry.loaded)">&plus;</span>
+                            <span class="spinner spinner-small" 
+                                  data-ng-show="entry.loading">
+                                  <img src ="img/ajaxspinner.gif"/></span>
+                            <span class="badge badge-info" 
+                                  data-ng-show="entry.showing" 
+                                  title="Click to hide replies"
+                                  data-ng-click="entry.showing=false; hideMoreReplies(entry.id)">&minus;</span>
+                        </td>
+                        <td><span class="threading-indent">{{entry.indent}}</span>
+                            <a data-ng-href="{{entry.uri}}" data-ng-click="viewAnnotation()"
+                               title="{{entry.title | truncate:longTitleLength}}">{{entry.title | truncate:shortTitleLength}}</a></td>
+
+                        <td class="listViewAuthorDetail"><a href="{{entry.uri}}" data-ng-click="directSearch('userName', entry.userName, $event)">{{entry.author}}</a></td>
+                        <td class="listViewAuthorDetail"><a href="{{entry.uri}}" data-ng-click="directSearch('organization', entry.organizationUri, $event);">{{entry.organizationName}}</a></td>
+                        <td>{{entry.date | date:'d MMM yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div data-ng-show="confirmingFlagAnno"
+            confirm-box content="confirmFlagAnnoBoxContent" on-confirm="flagAnnotation()" on-cancel="noFlagAnno()">
+        </div>
+        <div data-ng-show="confirmingDelete"
+            confirm-box content="confirmDeleteBoxContent" on-confirm="deleteAnnotation()" on-cancel="noDelete()">
+        </div>
+    </div>
+    </div>
+    <br />
+</div>
+</div>
+<div data-ng-include="'templates/footer.html'"></div>

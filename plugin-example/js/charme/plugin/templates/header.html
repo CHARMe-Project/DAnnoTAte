@@ -1,0 +1,39 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<div id="charmeDragHandle" class="modal-header" data-ng-controller="HeaderCtrl">
+    <button type="button" class="close window-controls" title="Close" data-ng-click="close()"><i class="icon-remove"></i></button>
+    <button type="button" class="close window-controls" title="Minimise" data-ng-click="minimise()" data-ng-show="size==='max'"><i class="icon-resize-small"></i></button>
+    <button type="button" class="close window-controls" title="Maximise" data-ng-click="maximise()" data-ng-show="size==='min'"><i class="icon-resize-full"></i></button>
+
+    <h3>
+        <span class="browser-history">
+            <button class="btn btn-mini" data-ng-show="size==='max'" title="Go back to previous page" data-ng-click="back();"><i class="icon-arrow-left"></i></button>
+            <button class="btn btn-mini" data-ng-show="size==='max'" title="Go forward to next page" data-ng-click="forward();"><i class="icon-arrow-right"></i></button>
+            <!--<button data-ng-show="size==='max'" class="btn btn-mini" title="Reload this page" data-ng-click="reload();"><i class="icon-repeat"></i></button>-->
+        </span>
+        <a href="http://www.charme.org.uk/" title="You are using the CHARMe Plugin &mdash; for more information about the CHARMe project, click here to visit the CHARMe website at http://www.charme.org.uk/" target="_blank">
+        <img src="img/CHARMe_title_small.png" id="charmeTitle" /></a>Annotations
+    </h3>
+</div>

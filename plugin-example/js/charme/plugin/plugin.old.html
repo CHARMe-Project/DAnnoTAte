@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- ### BEGIN CSS -->
+		<link rel="stylesheet" href="css/normalize.min.css">
+		<link rel="stylesheet" href="js/vendor/select2/select2.css"/>
+		<link rel="stylesheet" href="css/bootstrap.min.css">	
+    	<link rel="stylesheet" href="js/vendor/select2/select2-bootstrap.css">			
+		<link rel="stylesheet" href="css/main.css">
+        <!-- ### END CSS -->
+    </head>
+    <body>
+    	<div id="dialogHolder" data-show="true" class="modal" role="dialog" aria-hidden="true">
+			<div class="modal-header">
+			    <button id="CloseCross" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			    <h3>CHARMe Annotations<br/>
+			    <small id="DatasetName"></small>
+			    </h3>			    
+			</div>
+			<div class="modal-body" style="max-height: 270px; overflow-y: auto;">    	
+		    	<div id="annotations">
+			    	<div id="annotations-error" class="alert alert-error">
+			    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+			    		<h4>Error</h4>
+			    		<p>Could not retrieve annotations data.</p>
+					</div>
+					<div id="state-error" class="alert alert-error">
+			    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+			    		<h4>Error</h4>
+			    		<p>Could not change state.</p>
+					</div>			
+					<div class="accordion" id="anno-cats">
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+									Text annotations
+								</a>
+							</div>
+							<div id="collapseOne" class="accordion-body collapse in">
+								<div class="accordion-inner">
+									<ul id="text-list">
+											<li id="no-text-annos">No annotations.</li>
+								 			<li id="text-loading">Loading...</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+								  Publications
+								</a>
+							</div>
+							<div id="collapseTwo" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul id="ref-list"> 
+											<li id="no-ref-annos">No annotations.</li>
+								 			<li id="ref-loading">Loading...</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+								  Links
+								</a>
+							</div>
+							<div id="collapseThree" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul id="link-list">
+											<li id="no-link-annos">No annotations.</li>
+								 			<li id="link-loading">Loading...</li>
+									</ul>
+								</div>
+							</div>
+						</div>				
+					</div>
+		    	</div>
+		    </div>
+			<div class="modal-footer">
+				<div id="SignIn" class="btn-group pull-left hide">
+					<button class="btn btn-primary">Sign In</button>
+				</div>
+				<div id="AccountDetails" class="btn-group pull-left hide">
+					<button id="AccountDropDown" class="btn">a.henry@cgi.co</button>
+					<button class="btn dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu AccountButton">
+						<li><a id="LogoutButton" href="#">Logout</a></li>
+					</ul>
+				</div>
+				<button id="newAnnotationButton" type="button" class="btn" disabled="disabled" title="Please sign in to create annotations">New Annotation</button>
+				<button id="DoneButton" type="button" class="btn">Done</button>			
+  			</div>
+	    </div>
+	    <div id="loginDialog" class="modal hide" role="dialog" aria-hidden="true">
+					<form action="#" class="form-horizontal" id="login-form">
+							<div class="modal-header">
+							    <button id="login-CloseCross"type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							    <h3>Login to CHARMe</h3>
+							</div>
+							<div class="modal-body">
+								<div id="emailAddressGroup" class="control-group">										
+									<label for="emailAddress" class="control-label">Email Address</label>
+									<div class="controls">
+										<input type="text" name="emailAddress" id="emailAddress" placeholder="Enter your email address" data-placement="bottom" data-trigger="manual"></input>
+									</div>
+								</div>
+								<div id="userNameGroup" class="control-group">										
+									<label for="userName" class="control-label">Name</label>
+									<div class="controls">
+										<input type="text" name="userName" id="userName" placeholder="Enter your name" data-placement="bottom" data-trigger="manual"></input>
+									</div>
+								</div>								
+							</div>
+							<div class="modal-footer">
+				  				<button id="LoginCancel" type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+								<button id="LoginBtn" type="button" class="btn btn-primary">Login</button>			
+				  			</div>
+				  	</form>
+		</div>
+
+	    <div id="newAnnotation" class="modal hide" role="dialog" aria-hidden="true">
+						<form action="#" class="form-horizontal" id="annotation-form">
+							<div class="modal-header">
+							    <button id="newAnnotation-CloseCross"type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							    <h3>New Annotation</h3>
+							</div>
+							<div class="modal-body">
+						    	<div id="create-error" class="alert alert-error">
+						    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+						    		<h4>Error</h4>
+						    		<p>Could not save annotation data.</p>
+								</div> 
+								<fieldset>
+									<div class="control-group">
+										<label for="AnnoType" class="control-label">Type</label>
+										<div class="controls"> 
+											<select name="targetType" id="AnnoType" placeholder="Click to select categories">
+												<option value="cito">Publication</option>
+												<option value="text">Text</option>
+												<option value="url">Link</option>								
+											</select>
+										</div>
+									</div>					
+									<div id="AnnoBodyCito">
+										<div class="control-group">
+											<label for="CitoFacets" class="control-label">Categories</label>
+											<div class="controls FacetBoxHolder"> 
+												<select multiple="multiple" name="facets" class="FacetBox" id="CitoFacets" data-placeholder="Click to select categories">
+													<option></option>
+													<option value="earthobs">Earth Observation</option>
+													<optgroup label="INSPIRE Themes">
+														<option value="Addresses">Addresses</option>
+														<option value="Hyrdography">Hydrography</option>
+														<option value="Administrative">Administrative units</option>
+														<option value="Landcover">Land cover</option>
+														<option value="Agricultural">Agricultural and aquaculture facilities</option>
+														<option value="LandUse">Land use</option>
+														<option value="AreaManagement">Area management/restriction/regulation zones and reporting units</option>
+														<option value="Meteorological">Meteorological geographical features</option>
+														<option value="Atmospheric">Atmospheric conditions</option>
+														<option value="Mineral">Mineral resources</option>
+														<option value="Bio-geographical">Bio-geographical regions</option>
+														<option value="RiskZones">Natural risk zones</option>
+														<option value="Buildings">Buildings</option>
+														<option value="Oceanographic">Oceanographic geographical features</option>
+														<option value="Cadastral">Cadastral parcels</option>
+														<option value="Orthoimagery">Orthoimagery</option>
+														<option value="CRS">Coordinate reference systems</option>
+														<option value="PopulationDistribution">Population distribution — demography</option>
+														<option value="Elevation">Elevation</option>
+														<option value="Addresses">Production and industrial facilities</option>
+														<option value="Addresses">Energy resources</option>
+														<option value="Addresses">Protected sites</option>
+														<option value="Addresses">Environmental monitoring facilities</option>
+														<option value="Addresses">Sea regions</option>
+														<option value="Addresses">Geographical grid systems</option>
+														<option value="Addresses">Soil</option>
+														<option value="Addresses">Geographical names</option>
+														<option value="Addresses">Species distribution</option>
+														<option value="Addresses">Geology</option>
+														<option value="Addresses">Statistical units</option>
+														<option value="Addresses">Habitats and biotopes</option>
+														<option value="Addresses">Transport networks</option>
+														<option value="Addresses">Human health and safety</option>
+														<option value="Addresses">Utility and governmental services</option>
+													</optgroup>
+													<optgroup label="GCMD Keywords">
+														<option value="atmospheric">Data Analysis and Visualisation</option>
+														<option value="bathymetry">Calibration/Validation</option>
+														<option value="ice">Environmental Advisories</option>
+														<option value="salinity">Space Weather</option>
+														<option value="level">Hazards Managaement</option>														
+													</optgroup>
+													<optgroup label="Satellites (GCMD keywords)">													
+														<option value="waves">Nimbus</option>
+														<option value="waves">Landsat</option>
+														<option value="waves">Cryosat</option>
+														<option value="waves">Envisat</option>
+													</optgroup>													
+													<optgroup label="Atmospheric">
+														<option value="atmospheric">Atmospheric Measurements</option>
+														<option value="bromine">Bromine</option>
+														<option value="CO2">CO2</option>
+														<option value="iodine">Iodine</option>	
+														<option value="O2">O2</option>
+														<option value="ozone">Ozone</option>
+														<option value="nitrogen">Nitrogen</option>													
+													</optgroup>
+													<optgroup label="Geographic Regions">
+														<option value="salinity">Africa</option>
+														<option value="salinity">Arctic</option>
+														<option value="salinity">Antarctic</option>
+														<option value="salinity">Atlantic</option>
+														<option value="salinity">Australia</option>
+														<option value="salinity">Baltic</option>														
+														<option value="salinity">Central Asia</option>														
+														<option value="salinity">Europe</option>
+														<option value="salinity">Indian Ocean</option>
+														<option value="salinity">North America</option>
+														<option value="salinity">Oceania</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South America</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South East Asia</option>
+														<option value="salinity">Mediterranean</option>																					
+													</optgroup>																																	
+												</select>
+											</div>
+										</div>
+										<div class="control-group">								
+											<label for="AnnoBodyCitoInput" class="control-label">DOI</label>
+											<div class="controls">
+												<input type="text" name="bodyContentDOI" id="AnnoBodyCitoInput" placeholder="Enter a DOI" data-placement="left" data-trigger="manual"></input>
+												<a id="DOISearchButton" class="btn btn-small"><i class="icon-search"></i></a>
+											</div>
+										</div>
+									</div>
+									<div id="AnnoBodyBib" class="control-group hide success">
+										<label for="AnnoBodyCitoInput" class="control-label">Citation</label>
+										<div class="controls"><small><span id="BibTextHolder" class="text-success"></span></small></div>
+									</div>
+									<div id="AnnoBodyURL">
+										<div class="control-group">
+											<label for="URLFacets" class="control-label">Categories</label>
+											<div class="controls"> 
+												<select multiple="multiple" name="facets" class="FacetBox" id="URLFacets" data-placeholder="Click to select categories">
+													<option></option>
+													<option value="earthobs">Earth Observation</option>
+													<optgroup label="INSPIRE Themes">
+													<option></option>
+													<option value="earthobs">Earth Observation</option>
+													<optgroup label="INSPIRE Themes">
+														<option value="Addresses">Addresses</option>
+														<option value="Hyrdography">Hydrography</option>
+														<option value="Administrative">Administrative units</option>
+														<option value="Landcover">Land cover</option>
+														<option value="Agricultural">Agricultural and aquaculture facilities</option>
+														<option value="LandUse">Land use</option>
+														<option value="AreaManagement">Area management/restriction/regulation zones and reporting units</option>
+														<option value="Meteorological">Meteorological geographical features</option>
+														<option value="Atmospheric">Atmospheric conditions</option>
+														<option value="Mineral">Mineral resources</option>
+														<option value="Bio-geographical">Bio-geographical regions</option>
+														<option value="RiskZones">Natural risk zones</option>
+														<option value="Buildings">Buildings</option>
+														<option value="Oceanographic">Oceanographic geographical features</option>
+														<option value="Cadastral">Cadastral parcels</option>
+														<option value="Orthoimagery">Orthoimagery</option>
+														<option value="CRS">Coordinate reference systems</option>
+														<option value="PopulationDistribution">Population distribution — demography</option>
+														<option value="Elevation">Elevation</option>
+														<option value="Addresses">Production and industrial facilities</option>
+														<option value="Addresses">Energy resources</option>
+														<option value="Addresses">Protected sites</option>
+														<option value="Addresses">Environmental monitoring facilities</option>
+														<option value="Addresses">Sea regions</option>
+														<option value="Addresses">Geographical grid systems</option>
+														<option value="Addresses">Soil</option>
+														<option value="Addresses">Geographical names</option>
+														<option value="Addresses">Species distribution</option>
+														<option value="Addresses">Geology</option>
+														<option value="Addresses">Statistical units</option>
+														<option value="Addresses">Habitats and biotopes</option>
+														<option value="Addresses">Transport networks</option>
+														<option value="Addresses">Human health and safety</option>
+														<option value="Addresses">Utility and governmental services</option>
+													</optgroup>
+													<optgroup label="GCMD Keywords">
+														<option value="atmospheric">Data Analysis and Visualisation</option>
+														<option value="bathymetry">Calibration/Validation</option>
+														<option value="ice">Environmental Advisories</option>
+														<option value="salinity">Space Weather</option>
+														<option value="level">Hazards Managaement</option>														
+													</optgroup>
+													<optgroup label="Satellites (GCMD keywords)">													
+														<option value="waves">Nimbus</option>
+														<option value="waves">Landsat</option>
+														<option value="waves">Cryosat</option>
+														<option value="waves">Envisat</option>
+													</optgroup>													
+													<optgroup label="Atmospheric">
+														<option value="atmospheric">Atmospheric Measurements</option>
+														<option value="bromine">Bromine</option>
+														<option value="CO2">CO2</option>
+														<option value="iodine">Iodine</option>	
+														<option value="O2">O2</option>
+														<option value="ozone">Ozone</option>
+														<option value="nitrogen">Nitrogen</option>													
+													</optgroup>
+													<optgroup label="Geographic Regions">
+														<option value="salinity">Africa</option>
+														<option value="salinity">Arctic</option>
+														<option value="salinity">Antarctic</option>
+														<option value="salinity">Atlantic</option>
+														<option value="salinity">Australia</option>
+														<option value="salinity">Baltic</option>														
+														<option value="salinity">Central Asia</option>														
+														<option value="salinity">Europe</option>
+														<option value="salinity">Indian Ocean</option>
+														<option value="salinity">North America</option>
+														<option value="salinity">Oceania</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South America</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South East Asia</option>
+														<option value="salinity">Mediterranean</option>																					
+													</optgroup>					
+												</select>
+											</div>
+										</div>
+										<div class="control-group input-prepend">									
+											<label for="AnnoBodyURLInput" class="control-label">Link</label>
+											<div class="controls">
+												<span class="add-on">http://</span>
+												<input type="text" name="bodyContentURL" id="AnnoBodyURLInput" placeholder="Enter a URL"></input>
+											</div>
+										</div>
+									</div>					
+									<div id="AnnoBodyText">
+										<div class="control-group">
+											<label for="TextFacets" class="control-label">Categories</label>											
+											<div class="controls"> 
+												<select multiple="multiple" name="facets" class="FacetBox" id="TextFacets" data-placeholder="Click to select categories">
+													<option></option>
+													<option value="earthobs">Earth Observation</option>
+													<optgroup label="INSPIRE Themes">
+														<option value="Addresses">Addresses</option>
+														<option value="Hyrdography">Hydrography</option>
+														<option value="Administrative">Administrative units</option>
+														<option value="Landcover">Land cover</option>
+														<option value="Agricultural">Agricultural and aquaculture facilities</option>
+														<option value="LandUse">Land use</option>
+														<option value="AreaManagement">Area management/restriction/regulation zones and reporting units</option>
+														<option value="Meteorological">Meteorological geographical features</option>
+														<option value="Atmospheric">Atmospheric conditions</option>
+														<option value="Mineral">Mineral resources</option>
+														<option value="Bio-geographical">Bio-geographical regions</option>
+														<option value="RiskZones">Natural risk zones</option>
+														<option value="Buildings">Buildings</option>
+														<option value="Oceanographic">Oceanographic geographical features</option>
+														<option value="Cadastral">Cadastral parcels</option>
+														<option value="Orthoimagery">Orthoimagery</option>
+														<option value="CRS">Coordinate reference systems</option>
+														<option value="PopulationDistribution">Population distribution — demography</option>
+														<option value="Elevation">Elevation</option>
+														<option value="Addresses">Production and industrial facilities</option>
+														<option value="Addresses">Energy resources</option>
+														<option value="Addresses">Protected sites</option>
+														<option value="Addresses">Environmental monitoring facilities</option>
+														<option value="Addresses">Sea regions</option>
+														<option value="Addresses">Geographical grid systems</option>
+														<option value="Addresses">Soil</option>
+														<option value="Addresses">Geographical names</option>
+														<option value="Addresses">Species distribution</option>
+														<option value="Addresses">Geology</option>
+														<option value="Addresses">Statistical units</option>
+														<option value="Addresses">Habitats and biotopes</option>
+														<option value="Addresses">Transport networks</option>
+														<option value="Addresses">Human health and safety</option>
+														<option value="Addresses">Utility and governmental services</option>
+													</optgroup>
+													<optgroup label="GCMD Keywords">
+														<option value="atmospheric">Data Analysis and Visualisation</option>
+														<option value="bathymetry">Calibration/Validation</option>
+														<option value="ice">Environmental Advisories</option>
+														<option value="salinity">Space Weather</option>
+														<option value="level">Hazards Managaement</option>														
+													</optgroup>
+													<optgroup label="Satellites (GCMD keywords)">													
+														<option value="waves">Nimbus</option>
+														<option value="waves">Landsat</option>
+														<option value="waves">Cryosat</option>
+														<option value="waves">Envisat</option>
+													</optgroup>													
+													<optgroup label="Atmospheric">
+														<option value="atmospheric">Atmospheric Measurements</option>
+														<option value="bromine">Bromine</option>
+														<option value="CO2">CO2</option>
+														<option value="iodine">Iodine</option>	
+														<option value="O2">O2</option>
+														<option value="ozone">Ozone</option>
+														<option value="nitrogen">Nitrogen</option>													
+													</optgroup>
+													<optgroup label="Geographic Regions">
+														<option value="salinity">Africa</option>
+														<option value="salinity">Arctic</option>
+														<option value="salinity">Antarctic</option>
+														<option value="salinity">Atlantic</option>
+														<option value="salinity">Australia</option>
+														<option value="salinity">Baltic</option>														
+														<option value="salinity">Central Asia</option>														
+														<option value="salinity">Europe</option>
+														<option value="salinity">Indian Ocean</option>
+														<option value="salinity">North America</option>
+														<option value="salinity">Oceania</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South America</option>
+														<option value="salinity">Pacific</option>
+														<option value="salinity">South East Asia</option>
+														<option value="salinity">Mediterranean</option>																					
+													</optgroup>					
+												</select>
+											</div>
+										</div>
+										<div class="control-group">										
+											<label for="AnnoBodyTextInput" class="control-label">Text</label>
+											<div class="controls">
+												<textarea name="bodyContentText" id="AnnoBodyTextInput" rows="3"></textarea>
+											</div>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<div class="modal-footer">
+				  				<button id="CancelButton" type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+								<button id="SaveButton" type="button" class="btn btn-primary">Save</button>			
+				  			</div>
+			  			</form>
+					</div>
+	    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<!-- ## BEGIN SCRIPTS -->
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/vendor/Promise.js"></script>
+		<script src="js/vendor/select2/select2.min.js"></script>		
+		<script src="js/vendor/jsonld.js"></script>
+		<script src="js/jsonoa.js"></script>
+		<script src="js/vendor/wgxpath.install.js"></script>
+		<script src="js/charme.logic.js"></script>
+        <script src="js/charme.crossref.js"></script>
+        <script src="js/charme.xml.js"></script>
+        <script src="js/charme.atom.js"></script>
+		<script src="js/charme.web.js"></script>
+        <!-- ## END SCRIPTS -->
+    </body>
+</html>

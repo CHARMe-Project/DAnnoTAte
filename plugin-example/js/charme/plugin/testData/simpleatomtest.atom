@@ -1,0 +1,47 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:os="http://a9.com/-/spec/opensearch/1.1/"><id>http://charme-dev.cems.rl.ac.uk:8027/searchatom</id><title>CHARMe results</title><updated>2013-11-19T15:45:49.339912</updated><link href="http://charme-dev.cems.rl.ac.uk:8027/search/description" rel="search" type="application/opensearchdescription+xml" /><link href="http://charme-dev.cems.rl.ac.uk:8027/search/atom/?&amp;startIndex=1&amp;status=submitted" rel="self" type="application/atom+xml" /><link href="http://charme-dev.cems.rl.ac.uk:8027/search/atom/?&amp;startIndex=1&amp;status=submitted" rel="first" type="application/atom+xml" /><link href="http://charme-dev.cems.rl.ac.uk:8027/search/atom/?&amp;startIndex=11&amp;status=submitted" rel="next" type="application/atom+xml" /><link href="http://charme-dev.cems.rl.ac.uk:8027/search/atom/?&amp;startIndex=1&amp;status=submitted" rel="previous" type="application/atom+xml" /><link href="http://charme-dev.cems.rl.ac.uk:8027/search/atom/?&amp;startIndex=181&amp;status=submitted" rel="last" type="application/atom+xml" /><os:totalResults>186</os:totalResults><os:startIndex>1</os:startIndex><os:indexPerPage>10</os:indexPerPage><Query count="1" depth="1" format="json-ld" q="" role="request" startIndex="1" startPage="1" status="submitted" target="" title="" xmlns="http://a9.com/-/spec/opensearch/1.1/" /><entry><id>http://charme-dev.cems.rl.ac.uk/resource/5e5d38442a7945f889f3afe1ed0ce7b1</id><title>http://charme-dev.cems.rl.ac.uk/resource/5e5d38442a7945f889f3afe1ed0ce7b1</title><updated>2013-11-19T15:46:02.532224</updated><content>[{
+  "@id": "http://charme-dev.cems.rl.ac.uk/resource/5e5d38442a7945f889f3afe1ed0ce7b1",
+  "@type": "http://www.w3.org/ns/oa#Annotation",
+  "http://www.openannotation.org/spec/core/motivatedBy": {
+    "@id": "http://www.openannotation.org/spec/core/linking"
+  },
+  "http://www.w3.org/ns/oa#hasBody": {
+    "@id": "http://charme-dev.cems.rl.ac.uk/resource/c9379314d849485095c89241ca3ca49c"
+  },
+  "http://www.w3.org/ns/oa#hasTarget": {
+    "@id": "http://localhost:8090/DAV/NASA/Chlorophyl/2002/MY1DMM_CHLORA_2002-10.JPEG"
+  }
+},
+{
+  "@id": "http://charme-dev.cems.rl.ac.uk/resource/c9379314d849485095c89241ca3ca49c",
+  "@type": [
+    "http://www.w3.org/2011/content#ContentAsText",
+    "http://purl.org/dc/dcmitype/Text"
+  ],
+  "http://purl.org/dc/elements/1.1/format": "text/plain",
+  "http://www.w3.org/2011/content#chars": "just testing"
+}]
+</content><published>TO_BE_DONE_2011-01-21T11:05:29.511Z</published></entry></feed>

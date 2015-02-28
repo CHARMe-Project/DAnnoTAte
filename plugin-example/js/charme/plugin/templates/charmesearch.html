@@ -1,0 +1,121 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<form class="form-horizontal form-charme-search" data-ng-controller="SearchCtrl">
+    <div class="control-group">
+        <label class="control-label" for="chooseTargetType">Target type</label>
+        <div class="controls controls-row">
+            <select id="chooseTargetType" class="span5 target-types" data-target-type-keywords multiple
+                    data-target-types-to-show="targetTypeCategoriesForSearch" 
+                    data-ng-model="criteria.selectedTargetTypes"
+                    placeholder=" Select tags...">
+            </select>  <!-- 'multiple' property is inserted into the select tag by the directive, upon receiving targetTypeCategoriesForSearch -->
+            <span class="span1 search-question-icon icon-question-sign"
+                  title="Search by type of the annotation’s target (e.g. 'Dataset', 'Metadata Document').
+Only those types that apply to the annotations listed (on the right) are presented here as available search terms."></span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="chooseCitingType">Link type</label>
+        <div class="controls controls-row">
+            <select id="chooseCitingType" class="span5 citing-types" data-citing-type-keywords multiple
+                    data-citing-types-to-show="citingTypeCategoriesForSearch" 
+                    data-ng-model="criteria.selectedCitingTypes"
+                    placeholder=" Select tags...">
+            </select>  <!-- 'multiple' property is inserted into the select tag by the directive, upon receiving citingTypeCategoriesForSearch -->
+            <span class="span1 search-question-icon icon-question-sign"
+                  title="Search by type of the resource that the annotation links to (e.g. 'Journal article', 'Technical Report').
+Only those types that apply to the annotations listed (on the right) are presented here as available search terms."></span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="chooseDomain"><span>Domains of interest</span></label>
+        <div id="chooseDomainDiv" class="controls controls-row">
+            <select id="chooseDomain" class="span5 domains" data-domain-keywords multiple
+                    data-keywords-to-show="domainCategoriesForSearch" 
+                    data-ng-model="criteria.selectedDomains" 
+                    placeholder=" Select tags...">
+            </select>  <!-- 'multiple' property is inserted into the select tag by the directive, upon receiving domainCategoriesForSearch -->
+            <a class="span1 search-question-icon icon-question-sign"
+               href="http://gcmd.nasa.gov/learn/keyword_list.html"
+               target="_blank"
+               title='Search by domain of interest: one or more semantic tags describing the subject of the annotation, from the GCMD "Earth Science" vocabulary. This is a subset of the GCMD "Science and Services Keywords" list, which is available at http://gcmd.nasa.gov/learn/keyword_list.html (click on this help icon).
+Only those tags that apply to the annotations listed (on the right) are presented here as available search terms.'>
+            </a>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="chooseMotivation">Motivation</label>
+        <div class="controls controls-row">
+            <select id="chooseMotivation" class="span5 motivations" data-motivation-keywords multiple
+                    data-motivations-to-show="motivationCategoriesForSearch" 
+                    data-ng-model="criteria.selectedMotivations"
+                    placeholder=" Select tags...">
+            </select>  <!-- 'multiple' property is inserted into the select tag by the directive, upon receiving motivationCategoriesForSearch -->
+            <a class="span1 search-question-icon icon-question-sign"
+               href="http://www.openannotation.org/spec/core/core.html#Motivations"
+               target="_blank"
+               title="Search by motivation: one or more labels indicating why the annotation was made. For more information on how motivations are used and defined, see http://www.openannotation.org/spec/core/core.html#Motivations (click on this help icon).
+Only those motivations that apply to the annotations listed (on the right) are presented here as available search terms.">
+            </a>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="chooseOrganisation">Organisation</label>
+        <div class="controls controls-row">
+            <select id="chooseOrganisation" data-ng-model="criteria.selectedOrganization" class="span5 organisation select-placeholder"
+                    data-ng-change="changeOrganisation();" 
+                    data-ng-options="organization.uri as organization.label for organization in organizations">
+                <option value="">Select data provider...</option>
+            </select>
+            <span class="span1 search-question-icon icon-question-sign"
+                  title="Search by data provider (you may also simply click on an organisation's name wherever it appears).
+Only those organisations that apply to the annotations listed (on the right) are presented here as available search terms."></span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="chooseCreator">Creator</label>
+        <div class="controls controls-row">
+            <input id="chooseCreator" data-ng-model="criteria.selectedCreator" class="span5 creator" type="text" placeholder=" Enter author's username..."/>
+            <span class="span1 search-question-icon icon-question-sign"
+                  title="Search by author's username (you may also simply click on an author's name wherever it appears)."></span>
+        </div>
+    </div>
+
+    <div>
+        <button class="btn reset-button" data-ng-disabled="loadingList" data-ng-click="reset(false);" type="reset">Reset</button>
+    </div>
+    
+    <div class="annoListOptions">
+        <div>
+            Results per page:
+            <span data-ng-repeat="rpp in resultsPerPage" data-ng-click="setResultsPerPage(rpp)">
+                &nbsp;&nbsp;<a data-ng-class="rpp === selectedRPP ? 'selected' : 'notSelected'" href="">{{rpp}}</a>
+            </span>
+            <span data-ng-show="!loadingList && numResults > 0">
+                &nbsp; Total: {{numResults}}
+            </span>
+        </div>
+    </div>
+</form>
