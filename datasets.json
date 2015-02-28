@@ -1,15 +1,17 @@
-datasets =
-[
-  {
-     title="sfdsdfs",
-     abstract="agasdfasdfas",
-     uri="http;//asdasdfasdf.asdfsadf.asdfsd",
-     impactFactor=5
-  },
-  {
-     title="sfdsdfs",
-     abstract="agasdfasdfas",
-     uri="http;//asdasdfasdf.asdfsadf.asdfsd",
-     impactFactor=5
-  }  
-]
+{
+  datasets =
+  [
+    {
+      title="sfdsdfs",
+      abstract="agasdfasdfas",
+      uri="http://asdasdfasdf.asdfsadf.asdfsd",
+      impactFactor=5
+    },
+    {
+      title="sfdsdfs",
+      abstract="agasdfasdfas",
+      uri="http://asdasdfasdf.asdfsadf.asdfsd",
+      impactFactor=5
+    }  
+  ]
+}
