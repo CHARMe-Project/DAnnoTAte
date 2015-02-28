@@ -31,6 +31,15 @@
           <p>{{dataset.abstract}}</p>
           <h2>Annotations for {{dataset.title}}:</h2>
           <h3>Publications</h3>
+            <div class="panel panel-default" ng-repeat="publication in publications">
+              <div class="panel-heading">
+                <h3 class="panel-title">{{publication.title}}</h3>
+              </div>
+              <div class="panel-body">
+                Authors:
+                <span ng-repeat="author in publication.author">{{author.given}} {{author.family}}, </span>
+              </div>
+            </div>
           <h3>Related datasets</h3>
           <h3>What the users say</h3>
         </div>

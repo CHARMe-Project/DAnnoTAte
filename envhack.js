@@ -73,10 +73,11 @@ app.controller('MainCtrl', function($scope, $http) {
     })
     .success(function(data) {
       console.log(data);
-      if (data.results.bindings.length)
-        citationFromDOI(data.results.bindings[0].publication.value.split(":")[1]);
-      else
-        console.log("No bindings!");
+      $scope.publications = [];
+      data.results.bindings.forEach(function(item) {
+        citationFromDOI(item.publication.value);
+      });
+      console.log($scope.publications);
     })
     .error(function(data) {
       console.error(data);
@@ -113,7 +114,8 @@ app.controller('MainCtrl', function($scope, $http) {
   function citationFromDOI(url) {
     $http.get(url, {
       headers: {"Accept": "application/vnd.citationstyles.csl+json;q=1.0"},
-    }).
-    success(function(data) { console.log(data); });
+    })
+    .success(function(data) { console.log(data); $scope.publications.push(data); })
+    .error(function(data) { console.error(data); });
   }
 });
