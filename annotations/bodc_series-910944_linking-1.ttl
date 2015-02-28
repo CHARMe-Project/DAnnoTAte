@@ -1,0 +1,20 @@
+@prefix chnode: <http://localhost/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dctypes: <http://purl.org/dc/dcmitype/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<chnode:annoID> a oa:Annotation ;
+	oa:hasTarget <http://linked.bodc.ac.uk/series/910944> ;
+	oa:hasBody <http://linked.bodc.ac.uk/series/558065>;
+	oa:motivatedBy oa:linking ;
+	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
+	oa:serializedBy <chnode:agentID> .
+
+<chnode:agentID> a prov:SoftwareAgent ;
+	foaf:name "BODC SPARQL Harvester" .
+
+<http://linked.bodc.ac.uk/series/910944> a dctypes:Dataset .
+
+<http://linked.bodc.ac.uk/series/558065>a dctypes:Dataset .
