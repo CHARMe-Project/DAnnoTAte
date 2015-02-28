@@ -51,6 +51,8 @@ line.link {
     <script type="text/javascript" src="javascripts/d3/d3.layout.js"></script>
     <script type="text/javascript" src="javascripts/CodeFlower.js"></script>
     <script type="text/javascript" src="javascripts/dataConverter.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    
     <script type="text/javascript">
       var currentCodeFlower;
 
@@ -67,6 +69,44 @@ line.link {
       //d3.json('data.json', createCodeFlower);
       d3.json('simpledata.json', createCodeFlower);
       
+      
+      $(document).ready(function(){
+        
+        //var u = "http://charme-test.cems.rl.ac.uk/sparql?query=PREFIX+oa%3A+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Foa%23%3E%0D%0ASELECT+DISTINCT+%3Frelation%0D%0AWHERE+%7B%0D%0A++GRAPH+%3Chttp%3A%2F%2Flocalhost%3A3333%2Fprivateds%2Fdata%2Fsubmitted%3E+%7B+%0D%0A++++%7B%0D%0A++++++%3Fanno+oa%3AhasTarget+%3Chttp%3A%2F%2Fwww.bodc.ac.uk%2Fdata%2Fdocuments%2Fseries%2F910944%2F%3E+.%0D%0A++++++%3Fanno+oa%3AmotivatedBy+oa%3Alinking+.%0D%0A++++++%3Fanno+oa%3AhasBody+%3Frelation+.%0D%0A++++%7D+UNION+%7B%0D%0A++++++%3Fanno+oa%3AhasBody+%3Chttp%3A%2F%2Fwww.bodc.ac.uk%2Fdata%2Fdocuments%2Fseries%2F910944%2F%3E+.%0D%0A++++++%3Fanno+oa%3AmotivatedBy+oa%3Alinking+.%0D%0A++++++%3Fanno+oa%3AhasTarget+%3Frelation+.%0D%0A++++%7D%0D%0A++++%3Fanno+%3Fp+%3Fo%0D%0A++%7D+%0D%0A%7D%0D%0A&default-graph-uri=&output=json&stylesheet=";
+        
+        function yay(a,b,c){ console.log(['yay', a, b, c]); }
+        function nay(a,b,c){ console.log(['nay', a, b, c]); }
+        
+        var q = "PREFIX oa: <http://www.w3.org/ns/oa#> " +
+            "SELECT DISTINCT ?relation " + 
+            "WHERE { " + 
+              "GRAPH <http://localhost:3333/privateds/data/submitted> {  " + 
+                "{ " + 
+                  "?anno oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/> . " + 
+                  "?anno oa:motivatedBy oa:linking . " + 
+                  "?anno oa:hasBody ?relation . " + 
+                "} UNION { " + 
+                  "?anno oa:hasBody <http://www.bodc.ac.uk/data/documents/series/910944/> . " + 
+                  "?anno oa:motivatedBy oa:linking . " + 
+                  "?anno oa:hasTarget ?relation . " + 
+                "} " + 
+                "?anno ?p ?o " + 
+              "}"  +
+            "}";
+
+        
+        $.ajax( {
+            url: "http://charme-test.cems.rl.ac.uk/sparql",
+            data: {
+                "query": q
+            },
+            method: 'GET', 
+            dataType: 'json'
+         })
+        .done( yay ).fail( nay ).always(function() { console.log( "always" ); });
+      
+      });
+
     </script>
   </body>
 </html>
