@@ -2,9 +2,9 @@
   "datasets":
   [
     {
-      "title": "Dataset 1",
-      "abstract": "Here is some description from the data provider",
-      "uri": "http://example.edu/dataset/01",
+      "title": "Series 910944: CTD or STD cast",
+      "abstract": "The Western Channel Observatory will study the regional effects of ecosystem variability in the Western English Channel, in the context of global climate change. There is a long history of in situ observation at several sites (by the MBA for over 100 years and PML since the 1980s) that have been brought together to form the basis of the Western Channel Observatory; these observations include hydrography, nutrients, phytoplankton, zooplankton, demersal and pelagic fish and benthic measurements. It is upon these long-term time series that the WCO aims to continue building in order to investigate the current state of the ecosystem, how the ecosystem has changed and how the interactions of climate and fishing affect the ecosystem? The WCO provides an opportunity to combine modelling and Earth Observation infrastructure along with in situ data collection to demonstrate and validate short term forecasts of coastal phytoplankton and nutrient dynamics, as well as develop, calibrate and validate Earth Observation algorithms for bio-optical data.",
+      "uri": "http://linked.bodc.ac.uk/series/910944",
       "impactFactor": 5
     },
     {
