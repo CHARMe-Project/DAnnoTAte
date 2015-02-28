@@ -43,6 +43,12 @@
       "abstract": "An infrared satellite image showing recent observed cloud cover presented as a single tile map overlay.",
       "uri": "http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer",
       "impactFactor": 3
+    },
+    {
+      "title": "Welcome to Waterville ",
+      "abstract": "The Waterville website provides functionality for automatically generating simulated, domestic water meter readings. The objective is to provide researchers studying domestic water consumption with test data for their prototype applications. Default water use profiles have been provided which have been generated using industry statistics such as those provided by the Consumer Council for Water (UK).",
+      "uri": "http://waterville.hrwallingford.com/waterville/",
+      "impactFactor": 1
     }
   ]
 }
