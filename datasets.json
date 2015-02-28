@@ -2,10 +2,23 @@
   "datasets":
   [
     {
+      "title": "Sea Surface Temperature (ESA Climate Change Initiative)",
+      "abstract": "Sea Surface Temperature and Sea Ice gridded timeseries at 1/20 degree resolution covering the period XX to YY",
+      "uri": "http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43",
+      "vizLink": "http://cera.rdg.ac.uk/godiva2.html?menu=&layer=ccisst/analysed_sst&elevation=0&time=2010-12-31T12:00:00.000Z&scale=269.49298,305.947&bbox=-179.975006,-140.605474,179.975006,140.605474",
+      "impactFactor": 10
+    },
+    {
+      "title": "ECMWF ERA-Interim climate reanalysis",
+      "abstract": "The data assimilation system used to produce ERA-Interim is based on a 2006 release of the IFS (Cy31r2). The system includes a 4-dimensional variational analysis (4D-Var) with a 12-hour analysis window. The spatial resolution of the data set is approximately 80 km (T255 spectral) on 60 vertical levels from the surface up to 0.1 hPa.",
+      "uri": "http://www.ecmwf.int/en/research/climate-reanalysis/era-interim",
+      "impactFactor": 9
+    },
+    {
       "title": "Series 910944: CTD or STD cast",
       "abstract": "The Western Channel Observatory will study the regional effects of ecosystem variability in the Western English Channel, in the context of global climate change. There is a long history of in situ observation at several sites (by the MBA for over 100 years and PML since the 1980s) that have been brought together to form the basis of the Western Channel Observatory; these observations include hydrography, nutrients, phytoplankton, zooplankton, demersal and pelagic fish and benthic measurements. It is upon these long-term time series that the WCO aims to continue building in order to investigate the current state of the ecosystem, how the ecosystem has changed and how the interactions of climate and fishing affect the ecosystem? The WCO provides an opportunity to combine modelling and Earth Observation infrastructure along with in situ data collection to demonstrate and validate short term forecasts of coastal phytoplankton and nutrient dynamics, as well as develop, calibrate and validate Earth Observation algorithms for bio-optical data.",
       "uri": "http://www.bodc.ac.uk/data/documents/series/910944/",
-      "impactFactor": 5
+      "impactFactor": 51.82
     },
     {
       "title": "Series 558065: CTD or STD cast",
@@ -17,14 +30,31 @@
       "title": "Waves Recorded at Aldeburgh ",
       "abstract": "Waves were recorded at Aldeburgh as part of the Institute of Oceanographic Sciences (IOS) Sizewell-Dunwich Banks Field Study. This project was a comparative study of wave climates on the east coast of England. Measurements were made using an IOS frequency modulated (FM) pressure recorder deployed in a mean water depth of six metres approximately 150 metres offshore (datum not known) at position 52° 09' N, 001° 37' E. The spring tidal range at this site is only 2.3m. (Wave measurements were also made at Dunwich (14km to the north) and Southwold (20km to the north) using FM pressure recorders and at sites 1km and 5.5km offshore from Dunwich using Waverider wave recorders.) The Sizewell-Dunwich Banks Field Study was the subject of a series of IOS reports (summarised by Lees, 1983). Fortnum and Hardcastle (1979) and Carr et al. (1981) have described the results of the wave measurements.",
       "uri": "http://www.bodc.ac.uk/data/documents/series/40536/",
+      "impactFactor": 1476.44
+    },
+    {
+      "title": "HydroView Now: BaseMap ",
+      "abstract": "HydroView Now: Basemap comprises bathymetry feature types forming a single mosaicked rendition of worldwide coverage, specifically designed to be visualised alongside land-mapping APIs such as Google Maps and OpenStreetMap. HydroView Now: Basemap is delivered via a standard WMTS (web map tile service).",
+      "uri": "http://www.seazone.com/marine-maps/product/hydroview-now-basemap",
       "impactFactor": 3
     },
     {
-      "title": "Sea Surface Temperature (ESA Climate Change Initiative)",
-      "abstract": "Sea Surface Temperature and Sea Ice gridded timeseries at 1/20 degree resolution covering the period XX to YY",
-      "uri": "http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43",
-      "vizLink": "http://cera.rdg.ac.uk/godiva2.html?menu=&layer=ccisst/analysed_sst&elevation=0&time=2010-12-31T12:00:00.000Z&scale=269.49298,305.947&bbox=-179.975006,-140.605474,179.975006,140.605474",
-      "impactFactor": 10
+      "title": "Infrared satellite map layer ",
+      "abstract": "An infrared satellite image showing recent observed cloud cover presented as a single tile map overlay.",
+      "uri": "http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer",
+      "impactFactor": 3
+    },
+    {
+      "title": "Welcome to Waterville ",
+      "abstract": "The Waterville website provides functionality for automatically generating simulated, domestic water meter readings. The objective is to provide researchers studying domestic water consumption with test data for their prototype applications. Default water use profiles have been provided which have been generated using industry statistics such as those provided by the Consumer Council for Water (UK).",
+      "uri": "http://waterville.hrwallingford.com/waterville/",
+      "impactFactor": 1
+    },
+    {
+      "title": "Precipiation forecast map layer ",
+      "abstract": "Precipitation forecast map layers are available as a single image or as a set of titled images (Web Map Tile Service) covering the UK and showing precipitation.",
+      "uri": "http://www.metoffice.gov.uk/datapoint/product/precipitation-forecast-map-layer",
+      "impactFactor": 1
     }
   ]
 }

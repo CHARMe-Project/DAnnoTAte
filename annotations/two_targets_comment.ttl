@@ -4,10 +4,12 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cnt: <http://www.w3.org/2011/content#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
 
 <chnode:annoID> a oa:Annotation ;
 	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536/> ;
-	oa:hasBody <chnode:bodyID>;
+	oa:hasBody <chnode:bodyID> ;
 	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/>;
 	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
