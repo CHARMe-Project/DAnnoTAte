@@ -1,17 +1,17 @@
 {
-  datasets =
+  "datasets" =
   [
     {
-      title="sfdsdfs",
-      abstract="agasdfasdfas",
-      uri="http://asdasdfasdf.asdfsadf.asdfsd",
-      impactFactor=5
+      "title"="Dataset 1",
+      "abstract"="agasdfasdfas",
+      "uri"="http://asdasdfasdf.asdfsadf.asdfsd",
+      "impactFactor"=5
     },
     {
-      title="sfdsdfs",
-      abstract="agasdfasdfas",
-      uri="http://asdasdfasdf.asdfsadf.asdfsd",
-      impactFactor=5
+      "title"="sfdsdfs",
+      "abstract"="agasdfasdfas",
+      "uri"="http://asdasdfasdf.asdfsadf.asdfsd",
+      "impactFactor"=3
     }  
   ]
 }
