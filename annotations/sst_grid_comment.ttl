@@ -7,7 +7,7 @@
 
 <chnode:annoID> a oa:Annotation ;
 	oa:hasTarget <http://dx.doi.org/10.5285/782305d4-1ded-43f9-a0ed-40cb41ff0a43> ;
-	oa:hasBody <chnode:bodyID>;
+	oa:hasBody <chnode:bodyID> ;
 	oa:motivatedBy oa:commenting ;
 	oa:serializedAt "2014-06-13T23:29:49.729746"^^xsd:dateTime ;
 	oa:serializedBy <chnode:agentID> .
