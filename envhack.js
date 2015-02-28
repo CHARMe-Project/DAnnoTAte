@@ -53,7 +53,7 @@ app.controller('MainCtrl', function($scope, $http) {
     // At the moment we ignore the search string!
     // We load the list of datasets from the server. In a real system we would call a
     // web service here, but for now we just load a static file from GitHub!
-    $http.get('datasets.json')
+    $http.get('https://raw.githubusercontent.com/jonblower/envhack15-ui/master/datasets.json')
       .success(function(data) {
         console.log(data);
         $scope.datasets = data.datasets;
