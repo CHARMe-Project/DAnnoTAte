@@ -31,11 +31,17 @@
       "abstract": "Waves were recorded at Aldeburgh as part of the Institute of Oceanographic Sciences (IOS) Sizewell-Dunwich Banks Field Study. This project was a comparative study of wave climates on the east coast of England. Measurements were made using an IOS frequency modulated (FM) pressure recorder deployed in a mean water depth of six metres approximately 150 metres offshore (datum not known) at position 52° 09' N, 001° 37' E. The spring tidal range at this site is only 2.3m. (Wave measurements were also made at Dunwich (14km to the north) and Southwold (20km to the north) using FM pressure recorders and at sites 1km and 5.5km offshore from Dunwich using Waverider wave recorders.) The Sizewell-Dunwich Banks Field Study was the subject of a series of IOS reports (summarised by Lees, 1983). Fortnum and Hardcastle (1979) and Carr et al. (1981) have described the results of the wave measurements.",
       "uri": "http://www.bodc.ac.uk/data/documents/series/40536/",
       "impactFactor": 1476.44
-    }
+    },
     {
       "title": "HydroView Now: BaseMap ",
       "abstract": "HydroView Now: Basemap comprises bathymetry feature types forming a single mosaicked rendition of worldwide coverage, specifically designed to be visualised alongside land-mapping APIs such as Google Maps and OpenStreetMap. HydroView Now: Basemap is delivered via a standard WMTS (web map tile service).",
       "uri": "http://www.seazone.com/marine-maps/product/hydroview-now-basemap",
+      "impactFactor": 3
+    },
+    {
+      "title": "Infrared satellite map layer ",
+      "abstract": "An infrared satellite image showing recent observed cloud cover presented as a single tile map overlay.",
+      "uri": "http://www.metoffice.gov.uk/datapoint/product/satellite-infrared-map-layer",
       "impactFactor": 3
     }
   ]
