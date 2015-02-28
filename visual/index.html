@@ -55,55 +55,89 @@ line.link {
     
     <script type="text/javascript">
       var currentCodeFlower;
+      var w =400; var h = 400;
 
+      /*
       var createCodeFlower = function(json) {
-        var total = countElements(json);
-        //w = parseInt(Math.sqrt(total) * 50, 10);
-        //h = parseInt(Math.sqrt(total) * 50, 10);
-        w = 400;
-        h = 400;
         currentCodeFlower = new CodeFlower("#visualization", w, h).update(json);
-        //currentCodeFlower.showtext();
       };
-
-      //d3.json('data.json', createCodeFlower);
       d3.json('simpledata.json', createCodeFlower);
+      */
       
+      var transformData = function(data, u){
+            var u = !!u ? u : "Root";
+            
+            var data = !!data ? data : {
+              "head": {
+                "vars": [ "relation" ]
+              } ,
+              "results": {
+                "bindings": [
+                  {
+                    "relation": { "type": "uri" , "value": "http://www.bodc.ac.uk/data/documents/series/558065/" }
+                  } ,
+                  {
+                    "relation": { "type": "uri" , "value": "https://charme-test.cems.rl.ac.uk/resource/70e8ba3cd91b4c899c4a38001f94ef0a" }
+                  }
+                ]
+              }
+            };
+            
+            var children = [];
+            for(var i in data["results"]["bindings"]){;
+                var childUrl = data["results"]["bindings"][i]["relation"]["value"];
+                children.push({"name": childUrl, "size": 20});
+            }
+            var transformed = {
+                "name": u,
+                "children": children
+            };
+            
+            createCodeFlower = new CodeFlower("#visualization", w, h).update(transformed);
+            return transformed;
+      };
+      
+      var getDataElement = function(datasetURL){
+            var q = "PREFIX oa: <http://www.w3.org/ns/oa#> " +
+                "SELECT DISTINCT ?relation " + 
+                "WHERE { " + 
+                  "GRAPH <http://localhost:3333/privateds/data/submitted> {  " + 
+                    "{ " + 
+                      "?anno oa:hasTarget <{{datasetURL}}> . ".replace("{{datasetURL}}", datasetURL) + 
+                      "?anno oa:motivatedBy oa:linking . " + 
+                      "?anno oa:hasBody ?relation . " + 
+                    "} UNION { " + 
+                      "?anno oa:hasBody <{{datasetURL}}> . ".replace("{{datasetURL}}", datasetURL) + 
+                      "?anno oa:motivatedBy oa:linking . " + 
+                      "?anno oa:hasTarget ?relation . " + 
+                    "} " + 
+                    "?anno ?p ?o " + 
+                  "}"  +
+                "}";
+
+            
+            var ax = $.ajax( {
+                url: "http://charme-test.cems.rl.ac.uk/sparql",
+                data: {
+                    "query": q
+                },
+                method: 'GET', 
+                dataType: 'json'
+             });
+             return ax;
+         }
+
       
       $(document).ready(function(){
         
-        //var u = "http://charme-test.cems.rl.ac.uk/sparql?query=PREFIX+oa%3A+%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Foa%23%3E%0D%0ASELECT+DISTINCT+%3Frelation%0D%0AWHERE+%7B%0D%0A++GRAPH+%3Chttp%3A%2F%2Flocalhost%3A3333%2Fprivateds%2Fdata%2Fsubmitted%3E+%7B+%0D%0A++++%7B%0D%0A++++++%3Fanno+oa%3AhasTarget+%3Chttp%3A%2F%2Fwww.bodc.ac.uk%2Fdata%2Fdocuments%2Fseries%2F910944%2F%3E+.%0D%0A++++++%3Fanno+oa%3AmotivatedBy+oa%3Alinking+.%0D%0A++++++%3Fanno+oa%3AhasBody+%3Frelation+.%0D%0A++++%7D+UNION+%7B%0D%0A++++++%3Fanno+oa%3AhasBody+%3Chttp%3A%2F%2Fwww.bodc.ac.uk%2Fdata%2Fdocuments%2Fseries%2F910944%2F%3E+.%0D%0A++++++%3Fanno+oa%3AmotivatedBy+oa%3Alinking+.%0D%0A++++++%3Fanno+oa%3AhasTarget+%3Frelation+.%0D%0A++++%7D%0D%0A++++%3Fanno+%3Fp+%3Fo%0D%0A++%7D+%0D%0A%7D%0D%0A&default-graph-uri=&output=json&stylesheet=";
+        var datasetURL = "http://www.bodc.ac.uk/data/documents/series/910944/";
         
         function yay(a,b,c){ console.log(['yay', a, b, c]); }
         function nay(a,b,c){ console.log(['nay', a, b, c]); }
         
-        var q = "PREFIX oa: <http://www.w3.org/ns/oa#> " +
-            "SELECT DISTINCT ?relation " + 
-            "WHERE { " + 
-              "GRAPH <http://localhost:3333/privateds/data/submitted> {  " + 
-                "{ " + 
-                  "?anno oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/910944/> . " + 
-                  "?anno oa:motivatedBy oa:linking . " + 
-                  "?anno oa:hasBody ?relation . " + 
-                "} UNION { " + 
-                  "?anno oa:hasBody <http://www.bodc.ac.uk/data/documents/series/910944/> . " + 
-                  "?anno oa:motivatedBy oa:linking . " + 
-                  "?anno oa:hasTarget ?relation . " + 
-                "} " + 
-                "?anno ?p ?o " + 
-              "}"  +
-            "}";
-
-        
-        $.ajax( {
-            url: "http://charme-test.cems.rl.ac.uk/sparql",
-            data: {
-                "query": q
-            },
-            method: 'GET', 
-            dataType: 'json'
-         })
-        .done( yay ).fail( nay ).always(function() { console.log( "always" ); });
+        getDataElement(datasetURL)
+        .done( transformData )
+        .fail( nay ).always(function() { console.log( "always" ); });
       
       });
 
