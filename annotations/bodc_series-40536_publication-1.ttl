@@ -11,7 +11,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <chnode:annoID> a oa:Annotation, cito:CitationAct ;
-	oa:hasTarget <http://linked.bodc.ac.uk/series/40536> ;
+	oa:hasTarget <http://www.bodc.ac.uk/data/documents/series/40536> ;
 	oa:hasBody <chnode:bodyID> ;
 	oa:motivatedBy oa:commenting ;
 	oa:motivatedBy oa:linking ;
@@ -19,7 +19,7 @@
 	oa:serializedBy <chnode:agentID> ;
 	cito:hasCitingEntity "dx.doi.org/10.1029/2002JD002670" ;
 	cito:title "The operational sea surface temperature and sea ice analysis (OSTIA) system." ;
-	cito:hasCitedEntity <http://linked.bodc.ac.uk/series/40536> ;
+	cito:hasCitedEntity <http://www.bodc.ac.uk/data/documents/series/40536> ;
 	cito:hasCitationCharacterization cito:citesAsDataSource .
 
 <chnode:agentID> a prov:SoftwareAgent ;
