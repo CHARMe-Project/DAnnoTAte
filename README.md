@@ -8,7 +8,7 @@ Open http://jonblower.github.io/envhack15-ui/ for a demo (works best in Chrome, 
 See `annotations` directory for the Turtle files we used to create annotations on the CHARMe server.
 
 ## Contributors/conspirators
- * Phil Kershaw (@PhilipJKershaw), Antony Wilson and Charlie ?, STFC
+ * Phil Kershaw (@PhilipJKershaw), Antony Wilson and Charlie Newey, STFC
  * Jon Blower (@Jon_Blower), Gerardo Lopéz Saldaña, University of Reading
  * Stephan Siemen, Florian Rathgeber (@frathgeber), ECMWF
  * Filip Kral (@flpkrl, CEH)
