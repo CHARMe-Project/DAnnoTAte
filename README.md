@@ -3,7 +3,7 @@ User interface code for [CHARMe](http://www.charme.org.uk CHARMe) demonstrator d
 
 See `docs` directory for a PowerPoint overview presentation
 
-Open http://jonblower.github.io/envhack15-ui/ for a demo (works best in Chrome, because other browsers don't like the mixed content, http: and https:)
+Open http://charme-project.github.io/DAnnoTAte/ for a demo (works best in Chrome, because other browsers don't like the mixed content, http: and https:)
 
 See `annotations` directory for the Turtle files we used to create annotations on the CHARMe server.
 
