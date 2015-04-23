@@ -12,10 +12,10 @@ See `annotations` directory for the Turtle files we used to create annotations o
  * Jon Blower (@Jon_Blower), Gerardo Lopéz Saldaña, University of Reading
  * Stephan Siemen, Florian Rathgeber (@frathgeber), ECMWF
  * Filip Kral (@flpkrl, CEH)
- * Adam Shephered (@ashep_15, Woods Hole Oceanographic Institution)
+ * Adam Shepherd (@ashep_15, Woods Hole Oceanographic Institution)
  * Lise Quesnel (British Oceanographic Data Centre)
  * David Morris (CEFAS)
- * Stuart William (Epimorphics)
+ * Stuart Williams (Epimorphics)
 
 ## Scratch space for notes etc
 https://docs.google.com/document/d/1ZujtrNsQ7nJj_E03tKAGUxUB_n29Ap-qJn9vpdk99rw/edit#heading=h.2zewqmu8ivqw
