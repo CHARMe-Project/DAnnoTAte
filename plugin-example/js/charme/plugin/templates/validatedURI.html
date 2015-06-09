@@ -1,0 +1,7 @@
+<div data-ng-class="{'control-group error': linkType && !linkURI, 'control-group success': citoText}">
+    <input data-ng-model="linkURI" type="text"
+           class="input-block-level"
+           title="Please enter a URI. Use DOI where available."
+           placeholder="Annotation URI" data-ng-required="linkType"
+           data-ng-change="changeURI(anno.linkURI)" />
+</div>

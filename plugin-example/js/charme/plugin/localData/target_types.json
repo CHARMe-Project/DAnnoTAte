@@ -1,0 +1,62 @@
+[
+ {
+  "label": "Dataset",
+  "resource": "http://purl.org/dc/dcmitype/Dataset"
+ },
+ {
+  "label": "Technical Report",
+  "resource": "http://purl.org/spar/fabio/TechnicalReport"
+ },
+ {
+  "label": "Conference Paper",
+  "resource": "http://purl.org/spar/fabio/ConferencePaper"
+ },
+ {
+  "label": "Journal Article",
+  "resource": "http://purl.org/spar/fabio/JournalArticle"
+ },
+ {
+  "label": "Article",
+  "resource": "http://purl.org/spar/fabio/Article"
+ },
+ {
+  "label": "Academic Proceedings",
+  "resource": "http://purl.org/spar/fabio/AcademicProceedings"
+ },
+ {
+  "label": "Algorithm Theoretical Basis Document",
+  "resource": "http://purl.org/voc/charme#AlgorithmTheoreticalBasisDocument"
+ },
+ {
+  "label": "Product User Manual",
+  "resource": "http://purl.org/voc/charme#ProductUserManual"
+ },
+ {
+  "label": "Validation Report",
+  "resource": "http://purl.org/voc/charme#ValidationReport"
+ },
+ {
+  "label": "Operation Report",
+  "resource": "http://purl.org/voc/charme#OperationReport"
+ },
+ {
+  "label": "Service Message",
+  "resource": "http://purl.org/voc/charme#ServiceMessage"
+ },
+ {
+  "label": "Product Change Log",
+  "resource": "http://purl.org/voc/charme#ProductChangeLog"
+ },
+ {
+  "label": "Known Product Disruption",
+  "resource": "http://purl.org/voc/charme#KnownProductDisruption"
+ },
+ {
+  "label": "Metadata Document",
+  "resource": "http://purl.org/spar/fabio/MetadataDocument"
+ },
+ {
+  "label": "Annotation",
+  "resource": "http://www.w3.org/ns/oa#Annotation"
+ }
+]

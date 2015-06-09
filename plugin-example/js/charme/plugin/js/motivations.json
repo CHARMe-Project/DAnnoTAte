@@ -1,0 +1,57 @@
+{
+    "head": {
+        "vars": [ "p" , "l" ]
+    } ,
+    "results": {
+        "bindings": [
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#bookmarking" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > bookmarking" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#classifying" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > classifying" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#commenting" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > commenting" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#describing" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > describing" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#editing" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > editing" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#highlighting" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > highlighting" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#identifying" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > identifying" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#linking" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > linking" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#moderating" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > moderating" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#questioning" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > questioning" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#replying" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > replying" }
+            } ,
+            {
+                "p": { "type": "uri" , "value": "http://www.w3.org/ns/oa#tagging" } ,
+                "l": { "type": "literal" , "xml:lang": "en" , "value": "OA > Motivation > tagging" }
+            }
+        ]
+    }
+}                                                                                                                

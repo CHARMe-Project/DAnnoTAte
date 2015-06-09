@@ -1,0 +1,19 @@
+To run:
+
+Create Python virtual environment:
+
+$ virtualenv ~/virtualenvs/enviro-hack-charme/
+
+Activate this Python in system path:
+
+$ . ~/virtualenvs/enviro-hack-charme/bin/activate
+
+Install Paster web application server
+$ pip install PasteScript
+
+Run application listening on port 8080
+$ paster serve service.ini 
+
+Load in browser
+
+http://localhost:8080

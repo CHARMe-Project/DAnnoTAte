@@ -1,0 +1,120 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<div data-ng-include="'templates/header.html'"></div>
+<div class="modal-body modal-body-new">
+    <div data-ng-show="processing && !errorMsg" class="ajaxModal">
+        <div class="modalProgress spinner">
+            <img src="img/ajaxspinner.gif"/>
+        </div>
+    </div>
+    <div data-ng-hide="!loading" class="spinner spinner-small">
+        <img src ="img/ajaxspinner.gif"/>
+    </div>
+    <div class="alert alert-error" data-ng-show="errorMsg">{{errorMsg}}</div>
+        <div data-ng-show="!loading" class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-target="#tab1" data-toggle="tab">Details</a></li>
+                <li><a data-target="#tab2" data-toggle="tab">Targets <span class="badge badge-info">{{anno.targets.length}}</span></a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane .fade" id="tab2">
+                    <div data-ng-include="'templates/targetlist.html'"></div>
+                </div>
+                <div class="tab-pane active .fade" id="tab1">
+                    <form name="annoForm">
+                    <div data-ng-show="anno.id">
+                        {{anno.organizationName}} - {{anno.author}} - {{anno.modificationOf ? 'Edited at' : 'Created at'}} {{anno.date | date:' HH:mm, d MMM yyyy'}}
+                    </div>
+                    
+                    <h4>Comments <span title="Free text comments (&le;{{commentMaxLength}} characters) go here; a link may be included below" class="icon-question-sign"></span></h4>
+                    <textarea data-ng-model="anno.comment" maxlength="{{commentMaxLength}}" rows="3"></textarea>
+
+                    <h4>Motivation <a title="Select tag(s) indicating why you are making this annotation &mdash; for more information on how motivations are used and defined, see http://www.openannotation.org/spec/core/core.html#Motivations (click on this help icon)"
+                                      href="http://www.openannotation.org/spec/core/core.html#Motivations"
+                                      target="_blank"
+                                      class="icon-question-sign"></a></h4>
+                    <select data-motivations-to-show="motivationCategoriesForNewAnno" multiple
+                            data-ng-model="anno.motivation" data-motivation-keywords
+                            placeholder="Select motivations...">
+                    </select>
+
+                    <h4>Domain classification <a title='Select tag(s) describing the subject of this annotation, from the GCMD "Earth Science" vocabulary &mdash; this is a subset of the GCMD "Science and Services Keywords" list, which is available at http://gcmd.nasa.gov/learn/keyword_list.html (click on this help icon)'
+                                                 href="http://gcmd.nasa.gov/learn/keyword_list.html"
+                                                 target="_blank"
+                                                 class="icon-question-sign"></a></h4>
+                    <select data-keywords-to-show="domainCategoriesForNewAnno" multiple
+                            data-ng-model="anno.domain" data-domain-keywords
+                            placeholder="Select tags...">
+                    </select>
+
+                    <h4>Link <span
+                            title="Select type of reference (e.g. journal article) you wish to link to &mdash; a textbox will then open for the address"
+                            class="icon-question-sign"></span></h4>
+
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <select class="input-block-level" data-ng-model="anno.linkType"
+                                    title="Please select a link subtype"
+                                    data-ng-options="type.value as type.text for type in citoTypes"
+                                    data-ng-required="anno.linkType"
+                                    data-ng-change="changeType()">
+                                <option value="">No link</option>
+                            </select>
+                        </div>
+                        <div class="span1"></div>
+                        <div class="span7" data-ng-show="anno.linkType">
+                            <div data-ng-class="{'control-group error': (annoForm.annoURI.$invalid) || (anno.linkType && !anno.linkURI) || (anno.linkIsDOI && !doiText), 
+                                                 'control-group success': doiText && !annoForm.annoURI.$invalid}">
+                                <input name="annoURI" data-ng-model="anno.linkURI" type="text"
+                                       class="input-block-level"
+                                       title="Please enter a URI. Use DOI where available."
+                                       placeholder="Enter valid URI, e.g. 'http://www.example.com' or 'doi:12.34.5678/example123' (no spaces)." 
+                                       data-ng-required="anno.linkType" data-validated-uri>
+                            </div>
+                            <label class="checkbox">
+                                <input name="annoCitation" data-ng-model="anno.isCitation" type="checkbox"> Citation 
+                                <a title="Check this box if the link you are attaching cites your currently selected target &mdash; for more information on CiTO, the Citation Typing Ontology, see http://purl.org/spar/cito/ (click on this help icon)"
+                                   href="http://purl.org/spar/cito/"
+                                   target="_blank"
+                                   class="icon-question-sign"></a>
+                            </label>
+                        </div>
+                        <div class="span1" data-ng-show="doiText && !annoForm.annoURI.$invalid">
+                            <span class="icon-tag" title="{{doiText}}"></span>
+                        </div>
+                    </div>
+                 </form>
+                </div>
+            </div>
+        </div>
+
+        <div data-ng-show="confirmingContinue"
+            confirm-box content="confirmContinueBoxContent" on-confirm="continueEditing()" on-cancel="endEditing()">
+        </div>
+        <div data-ng-show="confirmingModify"
+            confirm-box content="confirmModifyBoxContent" on-confirm="save(anno)" on-cancel="noModify()">
+        </div>
+</div>
+<div data-ng-include="'templates/footer.html'"></div>

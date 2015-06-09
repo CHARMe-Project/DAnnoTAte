@@ -1,0 +1,26 @@
+[
+ {
+  "label": "Dataset",
+  "resource": "http://purl.org/dc/dcmitype/Dataset"
+ },
+ {
+  "label": "Instrument",
+  "resource": "http://blah.org/blah/Instrument"
+ },
+ {
+  "label": "Platform",
+  "resource": "http://blah.org/blah/Platform"
+ },
+ {
+  "label": "Bloke down the pub",
+  "resource": "http://blah.org/blah/BDLP"
+ },
+ {
+  "label": "Mystic Gnome",
+  "resource": "http://blah.org/blah/MysticGnome"
+ },
+ {
+  "label": "Daily Mail",
+  "resource": "http://blah.org/blah/DailyMail"
+ }
+]

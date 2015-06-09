@@ -1,0 +1,98 @@
+<!--
+  Copyright (c) 2014, CGI
+  All rights reserved.
+  Redistribution and use in source and binary forms, with or without modification, are 
+  permitted provided that the following conditions are met:
+  1. Redistributions of source code must retain the above copyright notice, this list of 
+     conditions and the following disclaimer.
+  2. Redistributions in binary form must reproduce the above copyright notice, this list 
+     of conditions and the following disclaimer in the documentation and/or other materials 
+     provided with the distribution.
+  3. Neither the name of the copyright holder nor the names of its contributors may be 
+     used to endorse or promote products derived from this software without specific prior 
+     written permission.
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
+  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
+  THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR 
+  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
+  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<div data-ng-include="'templates/header.html'"></div>
+<div class="modal-body modal-body-new">
+    <div data-ng-show="loading" class="ajaxModal">
+        <div class="modalProgress spinner">
+            <img src="img/ajaxspinner.gif"/>
+        </div>
+    </div>
+    <div class="alert alert-error" data-ng-show="errorMsg">{{errorMsg}}</div>
+    <form name="newAnnoForm">
+        <h4>Target<span data-ng-show="multipleTargets">s</span> <span title="Target(s) of this annotation" class="icon-question-sign"></span></h4>
+        <select id="selectedTarget" class="span12 targetList" data-ng-model="selectedTarget">
+            <option disabled class="target-type-{{targetDetails.type}}" 
+                    data-ng-repeat="(targetHref, targetDetails) in targetList" 
+                    value="{{targetHref}}">{{targetDetails.name}} ({{targetDetails.desc}})
+            </option>
+        </select>
+        
+        <h4>Comments <span title="Free text comments (&le;{{commentMaxLength}} characters) go here; a link may be included below" class="icon-question-sign"></span></h4>
+        <textarea data-ng-model="anno.comment" maxlength="{{commentMaxLength}}" rows="3"></textarea>
+
+        <h4>Motivation <span title="Select tag(s) describing the motivation of this annotation"
+                             class="icon-question-sign"></span></h4>
+        <select data-motivations-to-show="motivationCategoriesForNewAnno" data-motivation-keywords multiple
+                data-ng-model="anno.motivation"
+                placeholder="Select motivations...">
+        </select>
+
+        <h4>Domain classification <span title="Select tag(s) describing the subject of this annotation"
+                                        class="icon-question-sign"></span></h4>
+        <select data-keywords-to-show="domainCategoriesForNewAnno" data-domain-keywords multiple
+                data-ng-model="anno.domain" 
+                placeholder="Select tags...">
+        </select>
+
+        <h4>Link <span
+                title="Select type of reference (e.g. journal article) you wish to link to - a textbox will then open for the address"
+                class="icon-question-sign"></span></h4>
+
+        <div class="row-fluid">
+            <div class="span3">
+                <select class="input-large" data-ng-model="anno.type" name="type"
+                        title="Please select a link subtype"
+                        data-ng-options="type.value as type.text for type in citoTypes"
+                        data-ng-required="anno.type">
+                    <option value="">No link</option>
+                </select>
+            </div>
+            <div class="span1"></div>
+            <div class="span7" data-ng-show="anno.type">
+                <div data-ng-class="{'control-group error':anno.type && !anno.uri, 'control-group success':anno.citoText}">
+                    <input name="annoURI" data-ng-model="anno.uri" type="text"
+                           class="input-block-level"
+                           title="Please enter a URI. Use DOI where available."
+                           placeholder="Annotation URI" data-ng-required="anno.type"
+                           data-ng-change="changeURI(anno.uri)">
+                </div>
+            </div>
+            <div class="span1" data-ng-show="anno.citoText">
+                <span class="icon-tag" title="{{anno.citoText}}"></span>
+            </div>
+        </div>
+        
+        <!--<h4>Target classification <span title="Select type of target (e.g. dataset) you are annotating"
+                         class="icon-question-sign"></span></h4>
+        <div>
+            <select class="input-medium" data-ng-model="anno.target" name="type"
+                    title="Please select a target type"
+                    data-ng-options="target.text as target.text for target in targetTypes"
+                    data-ng-required="anno.target">
+            </select>
+        </div>-->
+    </form>
+</div>
+<div data-ng-include="'templates/footer.html'"></div>
